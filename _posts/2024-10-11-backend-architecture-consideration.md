@@ -39,7 +39,7 @@ CDN은 Contents Delivery Network의 약자로, 지리적으로 가까운 프록�
 데이테베이스 락 설정도 중요합니다. 비관적 락을 사용하면 경쟁상황이 없는 경우에도 불필요하게 락이 생성되기 때문에 성능이 저하될 수 있습니다. 반대로 낙관적 락은 트랜잭션 커밋시 격리 위반을 체크하기 때문에 rollback 처리로 경쟁상황에서 성능이 떨어질 수 있습니다. 따라서 경쟁여부, 락이 걸리는 범위(row, page), 속도 등을 판단해서 적절한 락 설정이 필요합니다.  
 <span style="background-color:#fff5b1">분산락을 이용하는 방법도 있습니다.</span> 분산락은 여러 서버에서 공유 데이터의 접근을 하나의 컴퓨터만 할 수 있도록 제어하는 방법입니다. 단순히 조회가 많은 애플리케이션이라면, 분산락을 이용해서 접근처리를 하고 RDBMS는 낙관적 락을 이용하는 방법으로 성능 부하를 줄일 수 있습니다.
 
-****
+---
 + 원티드 백엔드 온보딩 챌린지 7월
 + [CAP Theorem, 오해와 진실](http://eincs.com/2013/07/misleading-and-truth-of-cap-theorem/)
 + [레디스를 활용한 분산 락과 안전하고 빠른 락의 구현](https://hyperconnect.github.io/2019/11/15/redis-distributed-lock-1.html)

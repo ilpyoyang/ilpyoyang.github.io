@@ -1,13 +1,14 @@
-[//]: # (---)
-[//]: # (title: Effective Java)
-[//]: # (author: ilpyo)
-[//]: # (date: 2024-10-10 11:33:00 +0900)
-[//]: # (categories: [Kotlin])
-[//]: # (tags: [Kotlin, 스터디])
-[//]: # (pin: false)
-[//]: # (math: true)
-[//]: # (mermaid: true)
-[//]: # (---)
+---
+title: Effective Java
+author: ilpyo
+date: 2024-10-10 11:33:00 +0900
+categories: [Kotlin]
+tags: [Kotlin, 스터디]
+pin: false
+math: true
+mermaid: true
+published: false
+---
 
 > 작년에 [스터디](https://github.com/BacknPacker/effective_java)를 하면서 공부했던 내용이지만 복습을 위해 핵심 내용 위주로 정리하면서 학습했습니다. 이 부분의 대부분의 예시 코드는 이펙티브 자바 제공 [오픈소스](https://github.com/jbloch/effective-java-3e-source-code)에서 발췌했습니다.
 
@@ -54,7 +55,7 @@ NutritionFacts cocaCola = new NutritionFacts(240, 8, 100, 0, 35, 27);
 ### 3장. 모든 객체의 공통 메서드
 
 
-****
+---
 [effective-java-3e-source-code](https://github.com/jbloch/effective-java-3e-source-code)  
 [이펙티브 자바 Effective Java 3/E](https://www.yes24.com/Product/Goods/65551284)  
 [한달한권｜이펙티브 자바](https://zero-base.co.kr/me/courses/207614)

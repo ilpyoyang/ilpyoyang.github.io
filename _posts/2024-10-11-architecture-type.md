@@ -116,7 +116,7 @@ public class Order {
 **문제를 해결하기 위한 방법**  
 위와 같은 계층형 아키텍처의 문제를 해결하기 위해서는 <span style="background-color:#fff5b1">객체지향 개발 원칙인 SOLID 윈칙을 따르고, 단위 테스트를 적용</span>해서 부적절하게 넓은 계층이 만들어지거나 불필요한 영속성 계층으로의 의존도를 줄일 필요가 있습니다.
 
-****
+---
 [Clean Architecture](https://blog.cleancoder.com/uncle-bob/2012/08/13/the-clean-architecture.html)  
 [Layered Architecture](https://www.baeldung.com/cs/layered-architecture)  
 [계층형 아키텍처](https://jojoldu.tistory.com/603)  

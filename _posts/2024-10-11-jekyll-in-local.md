@@ -9,6 +9,7 @@ math: true
 mermaid: true
 ---
 
+### Jekyll GitHub 블로그 만들기
 ```깃헙계정 아이디```.github.io 로 된 repo를 생성합니다.   
 jekyll에서 맘에 드는 테마를 가지고 오면 되는데 이 블로그에 사용된 테마는 [gitbook 테마](http://jekyllthemes.org/themes/)입니다. 깃북으로 만들어도 되지만 더 마음대로 꾸밀 수 있고, 깃헙 파일구조도 깔끔하게 가지고 갈 수 있어서 jekyll 테마를 사용하게 되었습니다.  
 설치될 OS에 적합한 <span style="background-color:#fff5b1">Ruby</span>를 설치하고 <span style="background-color:#fff5b1">Jekyll+Devkit</span> 설치를 진행합니다.    
@@ -40,7 +41,7 @@ gem "http_parser.rb", "~> 0.6.0", :platforms => [:jruby]
 bundle exec jekyll serve
 ```
 
-##### 🚴🏽 FilePemissionError 발생시
+### FilePemissionError 발생시 해결방법
 Mac에서 다시 jekyll 세팅하는 과정에서 권한 오류가 발생했는데 root 권한으로 하지 않는 경우에 시스템 ruby에 대한 권한 문제로 발생한 에러압니다.
 [Mac에서 Gem::FilePermissionError 에러 발생시 해결 방법](https://jojoldu.tistory.com/288)의 향로님 글을 보고 해결했는데, 그 중에서 rbenv path를 설정하는 부분만 여기서 살펴보려고 합니다.
 ```

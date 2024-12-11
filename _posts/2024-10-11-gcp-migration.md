@@ -9,15 +9,15 @@ math: true
 mermaid: true
 ---
 
+### GCP에서 GCP로
 GCP에서는 300 크레딧을 무료로 사용할 수 있게 주기 때문에 처음에 POC를 만들거나 간단한 클라우드 테스트를 하기 정말 좋은 것 같습니다. Google Study Jam을 하면서 학습한 내용을 간단하게 적용해 보는 서비스를 만들어보고 싶다는 생각에 Gemini를 이용해 보기로 했습니다. Gemini 사용하고 크레딧을 무료로 사용할 수 있는 GCP로 프로젝트를 배포를 했었고 최근에는 크레딧을 다 사용한 뒤 계정을 변경해 다시 적용해보게 되었습니다. 
 AWS 마이그레이션도 잠깐 고민했었지만 비용과 서비스 통일성을 고려했을 때 다시 GCP를 이용하는게 맞다고 판단했습니다. 
 
-<p style="text-align: center; margin: 10px 0">
-    <img src="/assets/post_images/gcp/gcp_mg_1.png">
-</p>
+<img src="/assets/post_images/gcp/gcp_mg_1.png">
 
 처음 배포를 하면서 다양한 이슈를 만났고 그걸 다 옵시디언에 기록해두었지만 너무 맨땅에 헤딩한 것처럼 학습 부족으로 얻은 이슈들도 많았어서 테크 블로그 포스팅에 고민이 많았는데 이번 기회로 하나씩 순서대로 GCP 마이그레이션 과정을 작성해보고자 합니다.
 
+### 현재 프로젝트는?
 목표로 하는 프로젝트 구조도는 다음과 같습니다. 현재는 백엔드만 있는 서비스이기 때문에 간단한 구성의 프로젝트 구조도 형태입니다.
 
 <img src="/assets/post_images/gcp/gcp_project_structure.png">
@@ -28,7 +28,9 @@ AWS 마이그레이션도 잠깐 고민했었지만 비용과 서비스 통일�
 - 로드밸런서로 상황에 따라 인스턴스를 증가시켜 유동적으로 이슈에 대응하게 합니다.
 - Default가 아닌 VPC 네트워크 설정으로 보안 처리를 해줍니다.
 
-순서는 임의대로 지정해서 하면 되지만 몇 번 GCP 배포를 하면서 익숙해진 방식으로 작성했습니다.
+### 초간단 마이그레이션
+실제로 GCP 내에서 다른 계정으로 프로젝트를 옯기는 방법이 있겠지만 무료가 종료된 시점에서는 프로젝트 접근이 막혀서 되지 않았으므로 다시 세팅하는 방법을 선택했습니다.
+그래서 결과적으로 마이그레이션이라 썼지만 그냥 다시 만드는(?) 것과 동일합니다. 순서는 임의대로 지정해서 하면 되지만 몇 번 GCP 배포를 하면서 익숙해진 방식으로 작성했습니다.
 
 #### 1. IAM 세팅하기
 먼저, IAM을 세팅합니다. 서비스 계정을 GCE에 적용하기 위해 연관된 **Artifact Registry, Cloud SQL, Compute 인스턴스 관리자(v1), Vertex AI** 권한을 부여해줍니다. 사용에 따라 관리자 또는 리더를 선택해 주었습니다.
@@ -39,9 +41,7 @@ AWS 마이그레이션도 잠깐 고민했었지만 비용과 서비스 통일�
 [VPC 네트워킹 및 Google Compute Engine 시작하기](https://www.cloudskillsboost.google/focuses/41750?locale=ko&parent=catalog)와 같이 사용해보면서 감을 익힐 수 있기 때문에 문서나 이런 코스를 잘 찾아보면 큰 도움이 됩니다.
 설정 후에는 `telnet`으로 제대로 세팅되어 있는지 여부를 확인합니다.
 
-<p style="text-align: center; margin: 10px 0">
-    <img src="/assets/post_images/gcp/gcp_mg_3.png">
-</p>
+<img src="/assets/post_images/gcp/gcp_mg_3.png">
 
 #### 3. 인스턴스 만들기
 GCE 인스턴스를 만들면 바로 인스턴스 그룹으로 생성이 가능하기 때문에 템플릿 용도로 사용될 인스턴스를 만들어줍니다. 기본 OS, 용량 설정을 해주고 네트워킹 부분에서 앞서 열어둔 포트의 네임을 동일하게 작성해서 대상 포트로 적용될 수 있도록 합니다. 
@@ -49,9 +49,7 @@ GCE 인스턴스를 만들면 바로 인스턴스 그룹으로 생성이 가능�
 
 여기서 **네트워크 태그** 부분이 정말 중요한게 여기서 health check 설정을 이후에 로드밸런서에서 할 때 추가하지 않으면 `no health upstream`만 나오고 정상 동작하지 않습니다. 더 자세한 내용은 이후 로드밸런서 부분에 추가하겠습니다.  
 
-<p style="text-align: center; margin: 10px 0">
-    <img src="/assets/post_images/gcp/gcp_mg_2.png" style="width:100%">
-</p>
+<img src="/assets/post_images/gcp/gcp_mg_2.png" style="width:100%">
 
 이렇게 설정이 끝나면 상단에 **이 VM을 기반으로 인스턴스 그룹 만들기** 버튼으로 템플릿과 그룹을 동시 생성 가능합니다. 이 때, `ID 및 API 액세스`에서 액세스 범위를 한 번 더 확인해서 [🚴 GCE에서 Vertex AI 연동 이슈]({{site.baseurl}}/study/2023/05/07/GCP.html#-gce에서-vertex-ai-연동-이슈)와 같은 불상사가 생기지 않도록 합니다.
 
@@ -69,9 +67,7 @@ GCE 인스턴스를 만들면 바로 인스턴스 그룹으로 생성이 가능�
 [프로젝트 내에 SSL 처리](https://spring.io/blog/2023/06/07/securing-spring-boot-applications-with-ssl)를 하거나 개별 인스턴스에 인증서 관리를 해야하는 상황이라면 너무 번거럽고 일정 기간(무료로 사용할 수 있는 90일 기한 인증서의 경우) 갈아줘야한다는 단점이 존재합니다.
 따라서 [구글 관리형 SSL](https://cloud.google.com/load-balancing/docs/ssl-certificates/google-managed-certs?hl=ko#renewal)로 로드밸런서를 통한 인증 확인 후 백엔드 서비스에서는 http 포트를 열어 통신하는 방향으로 정했습니다.
 
-<p style="text-align: center; margin: 10px 0">
-    <img src="/assets/post_images/gcp/gcp_mg_5.png" style="width:80%">
-</p>
+<img src="/assets/post_images/gcp/gcp_mg_5.png" style="width:80%">
 
 로드밸런서는 [공식문서](https://cloud.google.com/load-balancing/docs/https/ext-https-lb-simple?hl=ko)에 가이드가 잘 나와 있어서 순서대로 적용했습니다. 처음에 그룹과 템플릿 설정만 기본 인스턴스를 토대로 했기 때문에 상이하게 적용된 부분은 있지만 전체적인 흐름은 동일합니다.
 프론트엔드 구성에서는 `HTTPS(HTTP/2 및 HTTP/3 포함)` 프로토콜로 구글 관리형 인증서를 연결해줍니다. 백엔드 서비스에서는 앞서 만든 인스턴스 그룹을 연결하고 캐시와 상태확인을 위한 설정을 해두었습니다. 자동확장은 대상 CPU 사용률 60%을 기준으로 해두었었는데 워낙 작은 인스턴스를 활용하니까 조금만 느려져도 확장이 발생하는 바람에 그 비율을 높이고 인스턴스 성능을 높여서 템플릿을 다시 만들었습니다.

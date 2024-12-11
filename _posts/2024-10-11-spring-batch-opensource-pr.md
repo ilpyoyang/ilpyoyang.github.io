@@ -12,13 +12,13 @@ mermaid: true
 Issue : [StepBuilder - issue when setting the taskExecutor before faultTolerant()](https://github.com/spring-projects/spring-batch/issues/4438)  
 PR : [Add AbstractTaskletStepBuilder copy constructor](https://github.com/spring-projects/spring-batch/pull/4471) 
 
-##### 들어가며
+### 들어가며
 오픈소스 기여 스터디를 통해 ```spring-batch``` 기여에 참여하게 되었습니다. 
 이슈 선정의 목표는 당시에 처음 오픈소스를 참여하는 것이라서 <span style="background-color:#fff5b1">욕심내지 않고, 쉬우면서 중요한 오픈소스에 기여해보자</span>는 단순한 목표를 가지고 시작했습니다. 
 GDG 오픈소스 스터디에 참여해서 스터디 운영자 분과 다른 스터디 참여하시는 분들의 PR 참여를 노션으로 보면서 기한 내에 PR를 할 수 있었습니다.
 (아직 merge 반영되지 않았지만 메인테이너가 확인한 상태입니다.)
 
-##### Spring batch에 대한 간략 설명
+### Spring batch에 대한 간략 설명
 Spring은 워낙 유명한 오픈소스이기 때문에 다들 알겠지만 spring-batch의 배치 잡을 사용할 프로젝트가 아닌 이상 사용해보지 않은 사람도 많은 것 같습니다.
 저도 알고는 있었지만 오픈소스로 내부 오픈소스를 본 것은 처음이었습니다.  
 
@@ -28,7 +28,7 @@ Spring batch는 <span style="background-color:#fff5b1">대량의 데이터를 �
 
 ![stepbuilder1.png](/assets/post_images/spring/stepbuilder1.png)
 
-##### 이슈 내용
+### 이슈 내용
 [이슈](https://github.com/spring-projects/spring-batch/issues/4438)가 간단하고 테스트코드를 잘 작성해주셔서 한 번에 이해하기 편했습니다.  
 ```step```을 만들 때, ```taskExecutor()```의 위치에 따라 필드 값이 잘 상속되지 않음을 알 수 있습니다.
 ```java
@@ -50,7 +50,7 @@ TaskletStep step2 = new StepBuilder("step-name", jobRepository)
                 .build();
 ```
 
-##### 오픈소스 분석
+### 오픈소스 분석
 ```TaskletStep```가 만들어지는 과정은 다음과 같은 구조도로 나타낼 수 있습니다. 
 ```
 StepBuilderHelper
@@ -108,7 +108,7 @@ public AbstractTaskletStepBuilder(StepBuilderHelper<?> parent) {
 }
 ```
 
-##### 해결방안
+### 해결방안
 ```AbstractTaskletStepBuilder```의 복사 생성자를 추가하므로서 필드 update가 가능하도록 처리했습니다.
 ```java
 public AbstractTaskletStepBuilder(AbstractTaskletStepBuilder<?> parent) {
@@ -211,7 +211,7 @@ public class AbstractTaskletStepBuilderTests {
 }
 ```
 
-##### 스터디 회고
+### 스터디 회고
 실제로 오픈소스에 기여한다는 건 생각만 해보고 시도한 적이 없었는데 이렇게 간단한 오픈소스를 통해 이번을 시작으로 다른 오픈소스에도 참여해보고 싶다는 생각이 들었습니다. 그리고 오픈소스 자체에 대한 심리적 부담감?같은 것이 있었는데 실제로 프로젝트에 참여하듯이 기여를 할 수 있다는 점이 좋았습니다.
 스터디가 아니였으면, 다른 사람들과 함께 하지 않았으면 시도가 더 늦어졌을 것 같은데 좋은 기회에 참여할 수 있어서 감사했습니다.  
 

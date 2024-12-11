@@ -16,16 +16,16 @@ Structs 환경에서 프로젝트 개발 경험은 없는데, 회사에서 오�
 
 ![20230511_154724_1.png](/assets/post_images/ide/20230511_154724_1.png)
 
-<br>
 
-**Setting 설정**  
+
+### Setting 설정 
 compiler를 ```Eclipse```로 설정합니다.
 
 ![20230511_154724_2.png](/assets/post_images/ide/20230511_154724_2.png)
 
-<br>
 
-**Project Settings 설정**  
+
+### Project Settings 설정 
 여기서 설정해야할 부분은 Project, Modules, Libraries, Facets, Artifacts입니다.
 
 <span style="background-color:#fff5b1">Project 부분</span>에서는 프로젝트와 일치하는 SDK를 설정합니다.
@@ -44,16 +44,16 @@ compiler를 ```Eclipse```로 설정합니다.
 
 ![20230511_154724_7.png](/assets/post_images/ide/20230511_154724_7.png)
 
-<br>
 
-**ojdbc8.jar 추가**  
+
+### ojdbc8.jar 추가 
 기존에 lib 위치에 ```ojdbc8.jar``` 파일이 없어서 [다운로드](https://www.oracle.com/database/technologies/appdev/jdbc-downloads.html) 받아서 추가해줬습니다. 자바 버전과 사용이 가능한 파일로 확인해서 추가해야 합니다.
 
 그럼 기본적인 setting은 끝났고 tomcat 연결만 남았습니다.
 
-<br>
 
-**Run/Debug Configurations 설정**  
+
+### Run/Debug Configurations 설정 
 ```Local Tomcat```을 추가합니다. Configure에서 apache-tomcat 경로설정을 합니다. 그리고 나면 fix라는 경고창이 뜨는데 클릭하면 ```Before launch``` 부분에 아까 설정했던 Artifacts가 추가된 것을 볼 수 있습니다. 혹시 경고창이 안 뜬다면 Build 외에 Artifacts가 추가됐는지 확인해주세요.
 
 ![20230511_154724_8.png](/assets/post_images/ide/20230511_154724_8.png)
@@ -63,7 +63,7 @@ compiler를 ```Eclipse```로 설정합니다.
 <span style="background-color:#FFE6E6">```Deployment``` 탭에서는 그리고 기본 경로 말고, 경로가 ```/```가 될 수 있도록 반드시 세팅해주세요.</span> 기본적으로 fix 경고창에 의해 Artifacts를 앞에 ```Server``` 탭에서 추가를 하면 기본 경로가 Artifacts가 반영된 경로로 설정되어 있을 가능성이 있습니다.  
 이렇게 하면 실행해서 ```localhost:8080```으로 페이지가 실행됩니다.
 
-<br>
 
-**참고사항**  
+
+### 참고사항 
 프로젝트를 가져오는 과정에서 디렉토리 root명을 변경한 경우, ```context.xml```에서 ```docBase```를 <span style="background-color:#fff5b1">변경된 이름과 동일하게</span> 변경해줘야 합니다.

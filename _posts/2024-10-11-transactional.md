@@ -13,7 +13,7 @@ mermaid: true
 
 <br>
 
-**@Transactional의 작동방식**  
+### @Transactional의 작동방식 
 <span style="background-color:#fff5b1">Spring boot 애플리케이션을 실행하는 시점</span>에 proxy 를 생성에 필요한 TransactionAutoConfiguration 등 클래스들이 자동으로 활성화됩니다. 따라서 클라이언트 request를 보내면 @Transactional이 적용된 메서드에 대한 트랜잭션 처리가 가능해집니다.
 ```java
 @Configuration(proxyBeanMethods = false)
@@ -49,7 +49,7 @@ Spring은 AOP 프레임워크를 이용하여 프록시를 생성하고, 특정 
 
 <br>
 
-**@Transactional의 속성**
+### @Transactional의 속성
 + propagation(전파방식)
   + REQUIRED, REQUIRES_NEW, NESTED, SUPPORTS, MANDATORY, NOT_SUPPORTED, NEVER
 + isolation(격리수준)
@@ -59,7 +59,7 @@ Spring은 AOP 프레임워크를 이용하여 프록시를 생성하고, 특정 
 
 <br>
 
-**사용할 때 이것만큼은 고려하자!**
+### 사용할 때 이것만큼은 고려하자!
 
 <span style="background-color:#fff5b1">1. 트랜잭션을 적용하려는 메서드는 반드시 public으로 선언되어야 합니다.</span>  
 프록시 객체로 외부에서 접근 가능한 인터페이스를 제공해야 하기 때문입니다. 만약 해당 메서드가 private이나 protected로 선언되어 있다면, 프록시 객체가 생성될 때 해당 메서드에 접근할 수 없으므로 @Transactional 어노테이션을 사용한 트랜잭션 관리가 불가능합니다.
@@ -85,6 +85,6 @@ Java에서는 롤백되지 않고 Checked exception을 try-catch, throw 방식�
 <span style="background-color:#fff5b1">6. 트랜잭션과 DeadLock</span>  
 실제로 DeadLock 이슈가 발생해서 리펙토링을 하면서 가장 유심히 본 부분 중 하나입니다. Service 계층에서 설정한 메서드들이 데이터베이스에서 어떤 방향으로 리소스를 점유하는지는 매우 중요합니다.
 
-****
+---
 [@Transactional 바르게 알고 사용하기](https://medium.com/gdgsongdo/transactional-%EB%B0%94%EB%A5%B4%EA%B2%8C-%EC%95%8C%EA%B3%A0-%EC%82%AC%EC%9A%A9%ED%95%98%EA%B8%B0-7b0105eb5ed6)
 [Spring Transaction Management: @Transactional In-Depth](https://www.marcobehler.com/guides/spring-transaction-management-transactional-in-depth)

@@ -128,7 +128,7 @@ class BulbController(private val bulb: Bulb) {
     + 기존 제품 구매를 통해 바로 충족시킬 수 있는 영역
     + 핵심/지원 서브도메인이 할당된 팀에서 직접 구현 가능
 
-****
+---
 
 [Domain-Driven Design Simplified.](https://medium.com/@jaysonmulwa/domain-driven-design-simplified-a03c732401c9)  
 [도메인 주도 설계에서의 전략적 설계](https://engineering-skcc.github.io/msa/DDD-StrategicDesign/)
@@ -146,6 +146,6 @@ class BulbController(private val bulb: Bulb) {
 타입 검사를 통과하지 못하면 항상 실행이 되지 않아야 하지만, ```union``` 타입에서는 타임에러를 검출할 수 없기 때문입니다. 따라서 강타입 '계열'의 언어로 보는 것이 바람직합니다.  
 <span style="background-color:#fff5b1">정적타입 언어는 코드작성이 빠르고 유연성이 높기 때문에 개발자가 효율적으로 작업할 수 있지만, 런타입 에러가 발생하거나 디버깅이 어렵다는 단점이 있습니다. 반면, 정적타입 언어는 컴파일 에러가 발생하기 때문에 타입에러를 미리 잡아 안정성이 높다고 할 수 있습니다. 하지만 코드 작성이 더 복잡하고 유연성이 낮다는 단점이 있습니다.</span>
 
-****
+---
 [Toggle the table of contents Strong and weak typing](https://en.wikipedia.org/wiki/Strong_and_weak_typing)
 

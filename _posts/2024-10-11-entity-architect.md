@@ -56,7 +56,7 @@ public void removeStock(int quantity){
 }
 ```
 
-****
+---
 [실전! 스프링 부트와 JPA 활용1 - 웹 애플리케이션 개발](https://www.inflearn.com/course/%EC%8A%A4%ED%94%84%EB%A7%81%EB%B6%80%ED%8A%B8-JPA-%ED%99%9C%EC%9A%A9-1)  
 [실전! 스프링 부트와 JPA 활용2 - API 개발과 성능 최적화](https://www.inflearn.com/course/%EC%8A%A4%ED%94%84%EB%A7%81%EB%B6%80%ED%8A%B8-JPA-API%EA%B0%9C%EB%B0%9C-%EC%84%B1%EB%8A%A5%EC%B5%9C%EC%A0%81%ED%99%94)  
 [필드에 있는 컬렉션을 초기화 시키는 이유가 뭔가요?](https://www.inflearn.com/questions/258175/%ED%95%84%EB%93%9C%EC%97%90-%EC%9E%88%EB%8A%94-%EC%BB%AC%EB%A0%89%EC%85%98%EC%9D%84-%EC%B4%88%EA%B8%B0%ED%99%94-%EC%8B%9C%ED%82%A4%EB%8A%94-%EC%9D%B4%EC%9C%A0%EA%B0%80-%EB%AD%94%EA%B0%80%EC%9A%94)  

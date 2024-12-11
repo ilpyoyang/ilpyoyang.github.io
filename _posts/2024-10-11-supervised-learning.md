@@ -40,7 +40,7 @@ mermaid: true
 **회귀**  
 예측해야할 대상이 <span style="background-color:#fff5b1">연속적인 숫자</span>인 문제를 말합니다. 주어진 데이터를 가지고 날씨나 부동산 시세를 예측하는 것을 회귀의 예로 들 수 있습니다.
 
-****
+---
 [Confusion Matrix를 통한 분류 모델의 평가](https://yamalab.tistory.com/50)  
 [Visualize Confusion Matrix Using Caret Package in R](https://www.geeksforgeeks.org/visualize-confusion-matrix-using-caret-package-in-r/)  
 [[용어 설명] ROC curve와 AUC란?](https://bioinfoblog.tistory.com/221)

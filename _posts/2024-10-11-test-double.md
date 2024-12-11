@@ -146,7 +146,7 @@ public class MockPaymentGatewayTest {
 <span style="background-color:#DCFFE4">그럼 언제 어떤 테스트 더블을 사용해야 할까?</span>  
 쓰임에 따라 사용해야할 테스트 더블은 다른데, <span style="background-color:#fff5b1">Mockist TDD의 경우에는 Mock만을 사용하고, Classicist TDD의 경우에는 Fake, Stub, Spy를 사용하는 것이 적절하고 경우에 따라서는 Mock도 사용할 수 있습니다.</span> Mockist과 Classicist에 대해서는 아래 작성한 글을 참고해주세요.
 
-****
+---
 
 [TestDouble - Martin Flower](https://martinfowler.com/bliki/TestDouble.html)  
 [Test Double(테스트 더블)알아보기](https://beomseok95.tistory.com/295)  

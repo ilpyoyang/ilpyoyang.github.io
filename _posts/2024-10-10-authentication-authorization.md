@@ -48,5 +48,5 @@ OAuth 1.0이 나온 때는 2007년이며, 이후 보안 문제를 해결한 수�
 5. Resource Server는 ```Access Token``` 발급
 6. API 호출시 유효한 ```Access Token```인 경우 Resource 제공
 
-****
+---
 + [OAuth와 춤을](https://d2.naver.com/helloworld/24942)

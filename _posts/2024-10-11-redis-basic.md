@@ -42,7 +42,7 @@ Pocket으로 하나의 Command가 완성되면 process Command에서 실행
 ##### 7. 하나의 작업을 실행하기 때문에 ```O(N)```의 다음 작업들은 피하기
 ```KEYS```, ```FLUSHALL```, ```FLUSHDB```, ```DELETE COLLECTIONS```, ```GET ALL COLLECTIONS```
 
-****
+---
 + [디디의 Redis](https://www.youtube.com/watch?v=Gimv7hroM8A&ab_channel=%EC%9A%B0%EC%95%84%ED%95%9C%ED%85%8C%ED%81%AC)  
 + [[우아한테크세미나] 191121 우아한레디스 by 강대명님](https://www.youtube.com/watch?v=mPB2CZiAkKM&ab_channel=%EC%9A%B0%EC%95%84%ED%95%9C%ED%85%8C%ED%81%AC)  
 + [[NHN FORWARD 2021] Redis 야무지게 사용하기](https://www.youtube.com/watch?v=92NizoBL4uA&ab_channel=NHNCloud)

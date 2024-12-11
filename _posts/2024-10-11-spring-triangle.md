@@ -11,7 +11,7 @@ mermaid: true
 
 Spring Triangle은 IoC, AOP, PSA로 나눌 수 있습니다.
 
-#### 의존성 주입과 제어역전, IoC(Inversion of Control)
+### 의존성 주입과 제어역전, IoC(Inversion of Control)
 ```java
 // 사용할 의존성을 외부에서 만들어주는 개념이 바로 IoC이다.
 class OwnerController {
@@ -25,7 +25,7 @@ class OwnerController {
 
 <br>
 
-#### 관점 지향 프로그래밍, AOP(Aspect Oriented Programming)  
+### 관점 지향 프로그래밍, AOP(Aspect Oriented Programming)  
 <span style="background-color:#fff5b1">관심사를 중점으로 중복된 코드를 모아서 횡단 관심사의 처리를 하는 프로그래밍 기법</span>을 말합니다. 예를 들어, 메서드별 성능을 재기 위해서 사용하는 ```org.springframework.util.StopWatch``` 스프링 프레임워크에서 제공하는 유틸을 사용할 수 있는데, 이런 공통기능들을 모든 메서드 실행 전 수행하고 시간을 측정하는 방식으로 AOP를 구성할 수 있습니다.    
 AOP를 구현하는 방법은 AspectJ를 이용한 컴파일을 이용하거나 바이트 코드를 조작하거나 프록시 패턴을 이용하는 방법들이 있습니다. 그 중에서도 스프링은 프록시 패턴을 이용해서 AOP를 지원하고 있습니다. 이는 실제 디자인패턴에서 말하는 프록시 패턴과 조금 상이한데, 리플렉션과 바이트코드 조작을 이용해 실제 타겟 기능을 대리 수행하며, 기능을 확장하거나 추가할 수 있는 <span style="background-color:#fff5b1">다이나믹 프록시 객체</span>를 의미합니다.
 ```java
@@ -63,11 +63,11 @@ A.java - A.class - (AOP) - 메모리(AspectJ)
 
 <br>
 
-#### 추상화 서비스, PSA(Portable Service Abstraction)  
+### 추상화 서비스, PSA(Portable Service Abstraction)  
 잘 만든 인터페이스. <span style="background-color:#fff5b1">환경 변화와 관계없이 일관된 방식의 기술로의 접근 환경을 제공하는 추상화 구조</span>를 말합니다. Spring에서는 Spring Web MVC, Spring Transaction, Spring Cache 등 다양한 PSA를 제공합니다. Spring MVC를 사용하면 @Controller, @RequestMapping 등의 기능을 기존 코드 변동없이 간단하게 코드 변경이 가능한 것을 알 수 있습니다. 이렇게 일관성 있는 서비스 추상화(Service Abstraction)을 만들 수 있습니다.
 + 프로젝트의 ```spring-boot-starter-web``` 의존성 대신 ```spring-boot-starter-webflux``` 의존성을 받도록 바꿔주기만 하면 ```Tomcat```이 아닌 ```netty``` 기반으로 실행하게 할 수 있습니다.
 
-<hr/>
+---
 
 [예제로 배우는 스프링 입문](https://www.inflearn.com/course/spring_revised_edition#)  
 [Inversion of Control Containers and the Dependency Injection pattern](https://martinfowler.com/articles/injection.html)
