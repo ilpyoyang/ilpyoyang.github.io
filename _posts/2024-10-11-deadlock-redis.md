@@ -4,7 +4,7 @@ author: ilpyo
 date: 2024-10-11 11:33:00 +0900
 categories: [Database]
 tags: [발표자료, DeadLock]
-pin: true
+pin: false
 math: true
 mermaid: true
 ---
