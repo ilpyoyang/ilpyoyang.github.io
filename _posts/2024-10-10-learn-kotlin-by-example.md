@@ -12,7 +12,7 @@ mermaid: true
 [Learn Kotlin by Example](https://play.kotlinlang.org/byExample/overview?_gl=1*9t8fde*_gcl_au*MTMyMjIyOTg2NC4xNzI5NzQ0OTky*_ga*MjIxOTA3MTMxLjE3Mjk3NDQ5ODg.*_ga_9J976DJZ68*MTcyOTc0NDk4OC4xLjEuMTcyOTc0NjM2OS41OC4wLjA.)  
 이 글의 모든 예시는 kotlin doc에서 차용했습니다. 모든 내용을 정리하지는 않고 아래 [kotlin을 시작하며]()와 같은 기본 내용을 제외한 중요내용을 추가했습니다.
 
-<hr>
+---
 
 #### 코틀린 타입
 코틀린은 원시 타입과 래퍼 타입을 구분하지 않습니다. 기본적으로 원시 타입을 사용하지 않고 컴파일시에 자바의 원시 타입과 래퍼 타입으로 자동 변환됩니다. 즉, 컴파일 시점에 원시 타입으로 변환되고, 런타임에서는 그 변환된 바이트코드가 실행됩니다.  
@@ -20,7 +20,7 @@ mermaid: true
 **Unit** 타입은 자바의 void와 같이 리턴이 없는 것으로 표시하며, 명시적 return을 사용하지 않아도 됩니다. 실제로 작성된 메서드도 없고 싱글턴으로 생성됨을 알 수 있습니다.   
 **Nothing** 타입은 함수가 정상적으로 종료되지 않는 함수임을 알 수 있습니다. 무한 루프를 포함하거나 항상 예외를 던지는 함수의 타입으로 사용됩니다. 🍎
 
-<hr>
+---
 
 #### infix 함수 🍎
 두 객체 중간에 들어가는 함수 형태로 함수 앞의 객체인 `dispatcher`와 함수 뒤의 객체인 `receiver`를 사용해서 함수에 적용할 수 있습니다. 클래스 내부에서는 `dispatcher`를 별도로 정의하지 않고 클래스 자신으로 구현할 수 있습니다.
@@ -30,7 +30,7 @@ infix fun Int.shl(x: Int): Int { ... }
 1.shl(2)
 ```
 
-<hr>
+---
 
 #### vararg 파라미터 🍎
 콤마(,)를 기준으로 주어진 값을 나누어 배열처럼 사용할 수 있게 해줍니다.
@@ -41,7 +41,7 @@ fun printAll(vararg messages: String) {
 printAll("Hello", "Hallo", "Salut", "Hola", "你好")
 ```
 
-<hr>
+---
 
 #### Null safty
 널을 사용하고자 하는 경우 변수 선언시 타입에 `?`를 사용해서 널이 인자로 들어올 수 있다는 것을 표기해야 합니다.  `?`는 nullable type이며, 허용되지 않는 곳에 널을 사용하려고 하는 경우에는 컴파일 에러가 발생합니다.
@@ -49,7 +49,7 @@ printAll("Hello", "Hallo", "Salut", "Hola", "你好")
 var nullable: String? = "You can keep a null here" 
 ```
 
-<hr>
+---
 
 #### 클래스
 기본 생성자는 코틀린에서 자동으로 생성됩니다. 기본 생성자를 생성할 때는 java와 달리 `new`를 표기하지 않아도 됩니다.
@@ -114,7 +114,7 @@ class BigBen {
 }
 ```
 
-<hr>
+---
 
 #### 제네릭 🍎
 `E`는 제네릭 타입을 나타내는 Element 파라미터입니다. 이 자리에는 `E` 또는 어떤 타입이든 사용될 수 있습니다. 그리고 리턴 자제도 `E`로 할 수 있습니다.  
@@ -123,12 +123,12 @@ class BigBen {
 fun <E> mutableStackOf(vararg elements: E) = MutableStack(*elements)
 ```
 
-<hr>
+---
 
 #### Inheritance
 `open`을 사용해서 클래스가 상속 가능하도록 합니다.
 
-<hr>
+---
 
 #### Control Flow
 ##### when
@@ -172,7 +172,7 @@ println(authors == writers)   // 1
 println(authors === writers)  // 2
 ```
 
-<hr>
+---
 
 #### Functional
 함수를 파라미터처럼 사용하거나 함수를 리턴하는 방식으로 사용될 수 있습니다.  
@@ -204,7 +204,7 @@ val upperCase6: (String) -> String = String::uppercase
 fun Order.maxPricedItemValue(): Float = this.items.maxByOrNull { it.price }?.price ?: 0F
 ```
 
-<hr>
+---
 
 #### Collections
 - `List`는 읽기만 가능하고 `MutableList`는 변동이 가능한 콜렉션입니다.
@@ -258,7 +258,7 @@ val B = listOf(1, 2, 3, 4)
 val resultPairs = A zip B 
 ```
 
-<hr>
+
 
 #### Scope Functions
 중첩 스코프 함수는 권장되지 않습니다.
@@ -282,7 +282,7 @@ val jake = Person("Jake", 30, "Android developer")
     }
 ```
 
-<hr>
+---
 
 #### Delegation
 코틀린에서는 `by`를 이용해서 클래스의 위임 패턴이 가능하게 합니다.
@@ -297,7 +297,7 @@ class User(val map: Map<String, Any?>) {
 }
 ```
 
-<hr>
+---
 
 #### Kotlin/JS
 - `dynamic`을 사용해서 런타임 시점에 동적으로 사용됩니다.

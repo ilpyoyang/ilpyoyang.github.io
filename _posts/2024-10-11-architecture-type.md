@@ -31,7 +31,7 @@ mermaid: true
 **작동원리**  
 사용자가 컴퓨터에 값을 입력하거나 프로그램을 실행할 경우 그 정보를 먼저 메모리에 저장시키고 CPU가 순차적으로 그 정보를 해석하고 계산해 사용자에게 결과값을 전달합니다.
 
-<br><br>
+  
 
 ##### Layered Architecture, 계층형 아키텍처
 > Presentation 계층, Domain(Business or Service) 계층, Data Access(Persistence or Infrastructure) 계층
@@ -97,7 +97,7 @@ public class Order {
 **Data Access 계층**  
 데이터베이스, Message Queue, 외부 API 통신 등을 처리하는 계층입니다.
 
-<br>
+ 
 
 ##### 계층형 아키텍처의 문제점
 <span style="background-color:#fff5b1">데이터베이스 주도 설계를 유도합니다.</span>  
@@ -111,7 +111,7 @@ public class Order {
 <span style="background-color:#fff5b1">동시 작업이 어려워집니다.</span>  
 영속성 계층을 중심으로 하기 때문에 협업이 어렵습니다. 도메인 또는 영속성 계층이 비대해지면 그 과정에서 동시에 편집해야 하는 경우가 발생하게 되고, merge하면서 코드 충돌이 발생할 수 있기 때문입니다.
 
-<br>
+ 
 
 **문제를 해결하기 위한 방법**  
 위와 같은 계층형 아키텍처의 문제를 해결하기 위해서는 <span style="background-color:#fff5b1">객체지향 개발 원칙인 SOLID 윈칙을 따르고, 단위 테스트를 적용</span>해서 부적절하게 넓은 계층이 만들어지거나 불필요한 영속성 계층으로의 의존도를 줄일 필요가 있습니다.

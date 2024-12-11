@@ -9,65 +9,6 @@ math: true
 mermaid: true
 ---
 
-## 질문자료 List
-##### CS
-+ [스레드와 트랜잭션](/study/2023/10/25/Interview.html#스레드와-트랜잭션)
-+ [멀티프로세스와 멀티스레드](/study/2023/10/25/Interview.html#멀티프로세스와-멀티스레드)
-+ [로컬변수, 멤버변수, 전역변수](/study/2023/10/25/Interview.html#로컬변수-멤버변수-전역변수)
-+ [객체지향 프로그래밍](/study/2023/10/25/Interview.html#객체지향-프로그래밍)
-+ [class, instance의 차이](/study/2023/10/25/Interview.html#class-instance의-차이)
-+ [객체지향 디자인 패턴](/study/2023/10/25/Interview.html#객체지향-디자인-패턴)
-+ [Stateful와 Stateless의 차이점](/study/2023/10/25/Interview.html#stateless와-stateful의-차이점)
-
-##### Web
-+ [인터넷의 동작원리](/study/2023/10/25/Interview.html#인터넷의-동작원리)
-+ [웹의 동작원리](/study/2023/10/25/Interview.html#웹의-동작원리)
-+ [HTTP](/study/2023/10/25/Interview.html#http)
-+ [Restful API란](/study/2023/10/25/Interview.html#restful-api란)
-+ [gRPC(google remote procedure cell)](/study/2023/10/25/Interview.html#grpcgoogle-remote-procedure-cell)
-+ [Web Server와 WAS의 차이](/study/2023/10/25/Interview.html#web-server와-was의-차이)
-+ [XML과 JSON의 차이 및 장단점](/study/2023/10/25/Interview.html#xml과-json의-차이-및-장단점)
-+ [XML에서 node, element, attribute의 차이 및 용도](/study/2023/10/25/Interview.html#xml에서-node-element-attribute의-차이-및-용도)
-+ [JSON에서 {}와 []의 용도](/study/2023/10/25/Interview.html#json에서-와-의-용동)
-
-##### Algorithm & Data Structure
-+ [stack, queue, list, tree, hash table](/study/2023/10/25/Interview.html#stack-queue-list-tree-hash-table)
-+ [정렬 알고리즘](/study/2023/10/25/Interview.html#정렬-알고리즘)
-
-##### Database
-+ [각 데이터베이스별 종류](/study/2023/10/25/Interview.html#각-데이터베이스별-종류)
-+ [데이터베이스 정규화](/study/2023/10/25/Interview.html#데이터베이스의-정규화)
-+ [Outer join이란?](/study/2023/10/25/Interview.html#outer-join이란)
-+ [View란?](/study/2023/10/25/Interview.html#view란)
-+ [Index란?](/study/2023/10/25/Interview.html#index란)
-+ [Stored procedure란?](/study/2023/10/25/Interview.html#stored-procedure란)
-+ [Transaction란?](/study/2023/10/25/Interview.html#transaction란)
-
-##### Spring
-+ [Spring을 사용하는 이유](/study/2023/10/25/Interview.html#spring을-사용하는-이유)
-+ [라이브러리와 프레임워크의 차이](/study/2023/10/25/Interview.html#라이브러리와-프레임워크의-차이)
-+ [AOP, DI, Interceptor, Filter](/study/2023/10/25/Interview.html#aop-di-interceptor-filter)
-+ [스프링에서의 reqeust 처리순서](/study/2023/10/25/Interview.html#스프링에서의-request-처리순서)
-+ [PSA portable service abstraction 추상화 서비스](/study/2023/10/25/Interview.html#psa-portable-service-abstraction-추상화-서비스)
-+ [Spring vs Spring boot](/study/2023/10/25/Interview.html#spring-vs-sprinb-boot)
-
-##### Java
-+ [자바의 스레딩](/study/2023/10/25/Interview.html#자바의-스레딩)
-+ [Hibernate](/study/2023/10/25/Interview.html#hibernate)
-+ [자바와 파이썬 차이, 장단점](/study/2023/10/25/Interview.html#자바와-파이썬-차이-장단점)
-+ [class, abstract class, interface](/study/2023/10/25/Interview.html#class-abstract-class-interface)
-+ [public, protected, private](/study/2023/10/25/Interview.html#public-protected-private) 
-+ [this, super](/study/2023/10/25/Interview.html#this-super) 
-+ [static, final](/study/2023/10/25/Interview.html#static-final) 
-+ [데이터 타입 중 primitive type, reference type](/study/2023/10/25/Interview.html#데이터-타입-중-primitive-type-reference-type) 
-+ [process와 thread 차이 및 용도, 그리고 어떻게 만들 수 있는지](/study/2023/10/25/Interview.html#process와-thread-차이-및-용도-그리고-어떻게-만들-수-있는지) 
-+ [직렬화란](/study/2023/10/25/Interview.html#직렬화란) 
-+ [@Override](/study/2023/10/25/Interview.html#override) 
-+ [배열과 ArrayList의 차이](/study/2023/10/25/Interview.html#배열과-arraylist의-차이) 
-+ [try, catch, finally의 개념 및 용도](/study/2023/10/25/Interview.html#try-catch-finally의-개념-및-용도)
-
-<br><br>
-
 ## CS
 ### 스레드와 트랜잭션
 + 스레드는 프로세스에서 실행되는 독립적인 실행 단위
@@ -141,7 +82,7 @@ public static Singleton getInstance() {
 + <span style="background-color:#fff5b1">Stateless 시스템은 이전의 상호작용에 대한 정보를 저장하지 않습니다. 예, HTTP 프로토콜</span>
 + Stateful은 상태유지로 이전의 상호작용 정보를 저장하고 유지하는 웹 애플리케이션의 로그인 세션을 예로 들 수 있습니다.
 
-<br><br>
+
 
 ## Web
 ### 인터넷의 동작원리
@@ -259,7 +200,7 @@ message User {
 + <span style="background-color:#fff5b1">중괄호는 JSON 객체를 대괄호는 JSON 배열을 의미합니다.</span>
 + 중괄호는 키-값 쌍의 컬렉션으로 구성
 
-<br><br>
+
 
 ## Algorithm & Data Structure
 ### Stack, Queue, List, Tree, Hash Table
@@ -281,7 +222,7 @@ message User {
   + ```병합정렬```은 배열을 두 개의 균등한 크기의 부분 배열로 분할하고, 각 부분 배열을 재귀적으로 정렬한 다음 병합합니다. 
   + ```퀵정렬```은 피벗을 선택하고 피벗보다 작은 요소들을 왼쪽에, 큰 요소들을 오른쪽에 위치시킨 후, 각 부분 배열에 대해 재귀적으로 정렬합니다.
 
-<br><br>
+
 
 ## Database
 ### 각 데이터 베이스별 종류
@@ -344,7 +285,7 @@ FROM EmployeeTable;
   + ```read uncommitted```에서는 고립성 성립 안 됨.
     + ```dirty read```, ```non-repeatable read```, ```phantom read``` 발생 가능성
 
-<br><br>
+
 
 ## Spring
 ### Spring을 사용하는 이유
@@ -404,7 +345,7 @@ FROM EmployeeTable;
   + Spring Boot Starter로 의존성을 그룹화하고 Spring Boot Dependency Management를 통해 의존성 버전을 관리합니다.
   + 둘 다 DispatcherServlet을 포함하고 있습니다.
 
-<br><br>
+
 
 ## Java
 ### 자바의 스레딩

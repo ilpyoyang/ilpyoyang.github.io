@@ -20,7 +20,7 @@ CI/CD는 개발자들이 애플리케이션을 더욱 빠르게 개발하고 배
 
 <br>
 
-**Github Action 설정**  
+#### Github Action 설정 
 자동 빌드를 위한 Github Action을 CI/CD 툴로 설정했습니다. 이미 버전관리가 Github으로 되어 있고, Travis는 일부 유료버전으로 변경되면서 접근이 안되는 부분이 있었기 때문입니다.  
 Actions 탭에서 구동을 위한 ```.yml```을 작성하면 ```.github/workflows``` 위치에 파일이 생성됩니다. 그리고 빌드가 성공적으로 되는지까지 확인합니다.  
 현재는 ```--exclude-task test```로 테스트 실패시에도 빌드가 가능하게 해놓은 상태입니다.
@@ -54,18 +54,18 @@ jobs:
 그리고 AWS 사용을 위해 AWS ACCESS KEY ID, SECRET KEY를 해당 레포 설정 ```Actions secrets and variables```에 등록합니다.  
 
 <span style="background-color:#DCFFE4">Jenkins, Travis와의 차이점</span>  
-+ **GitHub Actions**는 GitHub와 함께 제공되는 내장형 CI/CD 도구입니다. 설정과 사용이 쉽고, 다양한 GitHub 기능과 통합이 가능합니다. 작은 규모에서 중간 규모의 GitHub 프로젝트에 가장 적합합니다.
-+ **Jenkins**는 많은 해가 지난 인기 있는 오픈소스 CI/CD 도구입니다. 매우 유연하며 다양한 프로그래밍 언어와 도구와 함께 사용할 수 있습니다. 많은 맞춤 설정이 필요한 대규모, 복잡한 프로젝트에 가장 적합합니다.
-+ **Travis CI**는 GitHub 프로젝트에 특화된 클라우드 기반 CI/CD 도구입니다. 설정과 사용이 쉽고, 다양한 GitHub 기능과 통합이 가능합니다. 작은 규모에서 중간 규모의 GitHub 프로젝트에 가장 적합합니다.
++ #### GitHub Actions#### 는 GitHub와 함께 제공되는 내장형 CI/CD 도구입니다. 설정과 사용이 쉽고, 다양한 GitHub 기능과 통합이 가능합니다. 작은 규모에서 중간 규모의 GitHub 프로젝트에 가장 적합합니다.
++ #### Jenkins#### 는 많은 해가 지난 인기 있는 오픈소스 CI/CD 도구입니다. 매우 유연하며 다양한 프로그래밍 언어와 도구와 함께 사용할 수 있습니다. 많은 맞춤 설정이 필요한 대규모, 복잡한 프로젝트에 가장 적합합니다.
++ #### Travis CI#### 는 GitHub 프로젝트에 특화된 클라우드 기반 CI/CD 도구입니다. 설정과 사용이 쉽고, 다양한 GitHub 기능과 통합이 가능합니다. 작은 규모에서 중간 규모의 GitHub 프로젝트에 가장 적합합니다.
 
 <br>
 
-**S3 생성하기**  
+#### S3 생성하기 
 필요한 리전을 선택하고 버전 관리는 필요하지 않기 때문에 사용하지 않았습니다. 그리고 접근 가능한 IAM 사용자를 사용하기 때문에 모든 퍼블릭 액세스 차단을 선택해줍니다.  
 
 <br>
 
-**EC2 환경설정**  
+#### EC2 환경설정 
 EC2 기본 환경설정을 진행합니다. 제가 만든 인스턴스의 사양은 <span style="background-color:#fff5b1">Ubuntu 22.04 LTS, t2.micro(프리티어), 30GiB 스토리지</span>로 설정했습니다.  
 보안에는 S3, Codedeploy에 full access가 가능하도록 만든 IAM 역할을 부여합니다.  
 EC2 콘솔에서 JDK와 [Amazon correto](https://docs.aws.amazon.com/corretto/latest/corretto-17-ug/downloads-list.html)를 프로젝트 JDK와 일치하는 것으로 설치합니다. 
@@ -93,7 +93,7 @@ $ sudo ./install auto
 $ sudo service codedeploy-agent status
 ```
 
-**Github Action 설정변경**  
+#### Github Action 설정변경 
 앞에서 만들어준 .yml 파일에 ```env```와 ```jobs``` 내역을 수정합니다. push 후 진행되는 순서는 다음과 같습니다.
 1. Set up JDK 17
 2. Grant execute permission for gradlew
@@ -106,7 +106,7 @@ $ sudo service codedeploy-agent status
 
 <br>
 
-**appspec.yml 파일 작성**  
+#### appspec.yml 파일 작성 
 CodeDeploy 동작을 위해 ```appspec.yml``` 파일 작성합니다. CodeDeploy agent가 다운로드 코드를 어디 경로에서 다운받을지, EC2 서버 어디에 코드를 저장할지 등을 정합니다.  
 ```afterinstall```는 배포 스크립트에서 설치 프로세스가 완료된 후 실행되어야 하는 명령 또는 스크립트 목록을 포함하는 섹션입니다. 예시에서 afterinstall 섹션에는 AfterInstall이라는 이름의 훅이 포함되어 있습니다. 이 훅은 scripts/deploy.sh 쉘 스크립트의 위치를 지정하며, 60초의 타임아웃으로 실행되며 ubuntu 사용자로 실행됩니다.  
 ```yml
@@ -129,7 +129,7 @@ hooks:
 
 <br>
 
-**배포용 shell 스크립트**  
+#### 배포용 shell 스크립트 
 빌드된 jar 파일을 실행시키고 이미 실행되어 있다면 새로 빌드된 jar파일로 실행되도록 설정해줍니다.  
 ```
 #!/usr/bin/env bash

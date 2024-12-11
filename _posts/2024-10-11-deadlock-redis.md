@@ -9,20 +9,11 @@ math: true
 mermaid: true
 ---
 
-[PPT 전체 발표자료 보러가기](https://docs.google.com/presentation/d/1-F94vnSvdu6txY__kG8ewA8BAdba-no_cgQUQlhdtrg/edit?usp=sharing)  
-
-#### Contents
-+ [Deadlock에 대하여](#deadlock에-대하여)
-+ [Deadlock 어떻게 해결할 것인가](#deadlock-어떻게-해결할-것인가)
-+ [Redis에 대하여](#redis에-대하여)
-+ [Redis 대기열](#redis-대기열)
-+ [Redis 스핀락과 분산락](#redis-스핀락과-분산락)
-+ [Redis 스핀락과 분산락](#redis-스핀락과-분산락)
-+ [성능테스트와 대용량 트래픽 해결을 위한 방안 고찰](#성능테스트와-대용량-트래픽-해결을-위한-방안-고찰)
+[PPT 전체 발표자료 보러가기](https://docs.google.com/presentation/d/1-F94vnSvdu6txY__kG8ewA8BAdba-no_cgQUQlhdtrg/edit?usp=sharing)
 
 <img src="/assets/post_images/database/deadlock_issue.png">
 
-**Flow Map**  
+### Flow Map  
 발표내용 설명에 앞서 이 포스팅은 발표 내용 중 일부만을 정리한 내용으로 포스팅만으로는 흐름 전달이 어려울 수 있다고 생각했습니다. 그래서 실제 발표를 준비하면서 만든 flow map 통해 어떻게 내용을 정리했는지 그리고 전반적인 순서들에 대해 먼저 이야기해보고자 합니다.  
 
 주 내용은 실제 경험한 deadlock 이슈 그리고 그걸 해결하기 위한 방법이 어떤 것들이 있는지에 대해 담았습니다. 이후에는 그 중에서 redis 대기열과 분산락을 이용해 순차 접근이 가능하도록 하는 과정을 설명했습니다.  

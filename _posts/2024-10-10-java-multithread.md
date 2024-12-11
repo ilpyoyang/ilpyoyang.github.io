@@ -3,7 +3,7 @@ title: Java 멀티스레딩, 병행성 및 성능 최적화
 author: ilpyo
 date: 2024-10-10 11:33:00 +0900
 categories: [Java]
-tags: [멀티스레딩]
+tags: [멀티스레딩, 스터디]
 pin: false
 math: true
 mermaid: true
@@ -39,7 +39,7 @@ mermaid: true
 스레드에 시간을 할당하는 방법은 운영체제가 우선순위를 정하는 방법에 달려있습니다. 인터렉티브한 스레드에 우선순위를 두고, 스레드 자체는 생성과 파괴가 훨씬 쉽고 하나의 프로세스 안에서 여러 스레드를 사용해서 병행처리를 하면 더 빠르고 효과적으로 수행할 수 있습니다.  
 보안과 안전성을 위해서는 하나의 프로세스에서 실행되는 것이 좋습니다.  
 
-<br><br>
+  
 
 ### 2. 스레딩 기초 - 스레드 생성
 ##### 스레드 기능과 디버깅
@@ -173,7 +173,7 @@ public class MultiExecutor {
 + 제가 작성한 코드와 비교했을 때 솔루션이 더 좋다고 느낀 점이 많았는데, 일단 클래스에서 해당 클래스의 생성자 호출을 그 클래스 내의 메서드에서 ```new MultiExecutor(list);```와 같은 방식으로 표현하는게 부적절한 것 같았습니다.
 + 솔루션에서의 해답처럼 `private final List<Runnable> tasks;` 클래스 내 별도 지역 변수를 두고 그 변수를 활용해서 메서드를 만드는 것이 좋을 것 같다고 생각합니다.
 
-<br><br>
+  
 
 ### 3. 스레드 조정
 스레드를 조정하기 위해 `Thread.interrupt();`를 이용한 처리를 말해주고 있습니다. 하지만 이것만 가지고 이 스레드를 조정할 수행할 방법이 없다면 스레드를 멈추지 못할 수도 있습니다. `Thread.currentThread().isInterrupted()`로 스레드마다 interrupt 여부를 확인해서 체킹할 수 있을 것입니다.  
@@ -205,7 +205,7 @@ for (BigInteger i = BigInteger.ZERO; i.compareTo(power) != 0; i = i.add(BigInteg
 thread.setDaemon(true);
 ```
 
-<br><br>
+  
 
 ### 4. 성능 최적화
 여기서 말하는 성능은 `Latency` 지연시간과 `Throughput` 처리량으로 나눌 수 있습니다. 
@@ -246,7 +246,7 @@ public static void recolorImage(BufferedImage originalImage, BufferedImage resul
 처리량은 작업량을 스레드로 나눈 값(T/N)을 말합니다. 여기서 Task를 나누고 합치는 것만으로 비용이 발생하기 때문에 위에 별도 스레드를 만들지 않고 처리하는 것이 오히려 더 성능이 좋을 수도 있습니다. 
 하지만 스레드 수가 더 많아지면 그 처리량에서 처리가 나기 때문에 일정 수 이상의 스레드에서는 성능이 더 좋게 나오는 것을 볼 수 있습니다.
 
-<br><br>
+  
 
 ### 5. 스레드 간 데이터 공유
 ##### 스택과 힙
@@ -255,7 +255,7 @@ public static void recolorImage(BufferedImage originalImage, BufferedImage resul
 원자적 작업이란 말그대로 하나의 원자와 같이 작업 자체가 한 번에 실행되는 경우를 말합니다.  
 `items++;`는 원자적 작업이라고 볼 수 없는데 그 이유는 메모리에서 현재 값을 가지고 오고, 그 다음 그 값에 1을 더하고, 그 `new Value`를 `items`에 대입하는 식으로 진행되기 때문입니다.
 
-<br><br>
+  
 
 ### 6. 병행성 문제와 솔루션
 ##### 임계영역과 동기화
@@ -319,7 +319,7 @@ public class Main {
 }
 ```
 
-<br><br>
+  
 
 ### 7. 락킹 심화
 ReentrantLock은 자바에서 제공하는 개념으로 락의 공정성을 제어하는 방식입니다. 주로 읽기 작업을 하고 쓰기 작업이 적은 경우에는 ReentrantReadWriteLock을 사용해서 공유자원을 동시에 읽는 것을 허용하는 것이 더 효과적입니다.

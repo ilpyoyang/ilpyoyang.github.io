@@ -1,13 +1,14 @@
-[//]: # (---)
-[//]: # (title: Toy project)
-[//]: # (author: ilpyo)
-[//]: # (date: 2024-10-10 11:33:00 +0900)
-[//]: # (categories: [Kotlin])
-[//]: # (tags: [Kotlin, 스터디])
-[//]: # (pin: false)
-[//]: # (math: true)
-[//]: # (mermaid: true)
-[//]: # (---)
+---
+title: Toy project
+author: ilpyo
+date: 2024-10-10 11:33:00 +0900
+categories: [Kotlin]
+tags: [Kotlin, 스터디]
+pin: false
+math: true
+mermaid: true
+published: false
+---
 
 ## Toy Project List 
 + [원티드 백엔드 인턴쉽 사전과제](/manage/2023/09/18/Toy_project.html#원티드-백엔드-인턴쉽-사전과제)
