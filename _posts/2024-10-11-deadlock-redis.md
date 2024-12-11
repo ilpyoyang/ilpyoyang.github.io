@@ -3,7 +3,7 @@ title: DeadLock과 Redis 대기열
 author: ilpyo
 date: 2024-10-11 11:33:00 +0900
 categories: [Database]
-tags: [DeadLock]
+tags: [발표자료, DeadLock]
 pin: true
 math: true
 mermaid: true

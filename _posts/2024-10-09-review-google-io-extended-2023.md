@@ -9,13 +9,11 @@ math: true
 mermaid: true
 ---
 
-발표자료: [Deadlock과 Redis 대기열 발표자료 바로가기](/pr/2023/05/04/Database_pr.html)
+발표자료: [Deadlock과 Redis 대기열 발표자료 바로가기](https://drive.google.com/file/d/18k5-i0K-Z1HflpjUriXxtuZkFLVTg2gN/view?usp=sharing)  
+행사일시: 2023-08-26
 
-<p style="text-align: center; margin: 50px 0">
-    <img src="/assets/post_images/retrospect/google_io_extended_2023.jpg" style="width: 60%"/>
-</p>
+<img src="/assets/post_images/retrospect/google_io_extended_2023.jpg"/>
 
-**2023-08-26**  
 벌써 Google I/O Extended Incheon 2023 행사 참여가 끝난지 일주일이 지난 시점에 회고를 작성하게 되었습니다.
 감사하게도 정말 많은 사람들이 참여해주셔서 거의 500명이 되는 인원들이 모이는 큰 행사가 될 수 있었습니다.  
 
