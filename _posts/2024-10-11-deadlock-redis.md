@@ -20,7 +20,7 @@ mermaid: true
 + [Redis 스핀락과 분산락](#redis-스핀락과-분산락)
 + [성능테스트와 대용량 트래픽 해결을 위한 방안 고찰](#성능테스트와-대용량-트래픽-해결을-위한-방안-고찰)
 
-<img src="/assets/post_images/database/deadlock_issue.png" alt="">
+<img src="/assets/post_images/database/deadlock_issue.png">
 
 **Flow Map**  
 발표내용 설명에 앞서 이 포스팅은 발표 내용 중 일부만을 정리한 내용으로 포스팅만으로는 흐름 전달이 어려울 수 있다고 생각했습니다. 그래서 실제 발표를 준비하면서 만든 flow map 통해 어떻게 내용을 정리했는지 그리고 전반적인 순서들에 대해 먼저 이야기해보고자 합니다.  
@@ -29,9 +29,7 @@ mermaid: true
 핵심 해결과정 설명 전, 이해를 위해 redis에 대한 설명을 추가했습니다. 그리고 마지막으로 redis 대기열과 분산락 jmeter 성능비교 및 더 많은 트래픽을 견디기 위한 방법들에 대한 이야기를 담았습니다.  
 
 ### Deadlock에 대하여
-<p style="text-align: center; margin: 50px 0">
-  <img src="/assets/post_images/database/deadlock_issue_0.jpg">
-</p>
+<img src="/assets/post_images/database/deadlock_issue_0.jpg">
 
 <span style="background-color:#fff5b1">DeadLock은 두 트랜잭션이 서로 다른 리소스를 점유한 상태에서 상대 리소스 점유를 얻기 위해 기다리고 있는 교착상태</span>입니다. ```Transaction 1```이 ```Transaction 2```가 점유한 리소스 B에 접근할 수 없고, 반대로 ```Transaction2```도 리소스 A에 접근할 수 없는 상태가 되어 무한 대기가 발생하는 상황을 말합니다.
 
@@ -114,9 +112,7 @@ configuration 파일에 보면, <span style="background-color:#fff5b1">entry가 
 
 먼저 ziplist 구조를 보면, 상대적으로 entry가 작기 때문에 선형의 구조로 entry가 저장되는 것을 볼 수 있습니다. 한 entry는 값과 점수 쌍을 의미합니다.
 
-<p style="text-align: center; margin: 50px 0">
-  <img src="/assets/post_images/database/deadlock_issue_5.jpg">
-</p>
+<img src="/assets/post_images/database/deadlock_issue_5.jpg">
 
 skiplist는 안에는 노드의 처음과 끝을 가리키는 ```header```와 ```tail```이 있고 노드의 갯수와 노드 내 ```level``` 수를 알 수 있습니다. 각 노드는 값과 점수 그리고 노드 내 레벨 안에 forward로 다음 노드를 알 수 있습니다.  
 예를 들어 네 번째 노드의 값 ```element```를 찾는다고 하면, 높은 레벨에서 큰 단위로 점프한 다음, 다음 노드를 찾기 때문에 더 빠르게 검색이 가능합니다.
@@ -193,9 +189,7 @@ redission으로 분산락을 구현하게 되면 ```getLock()``` 메서드를 �
 Jmeter로 성능테스트를 진행했고 이벤트 목표 인원의 10배인 동시 접속자 수로 받는다고 했을 때, redis lettuce 스핀락, redisson 스핀락, redisson 분산락에서는 데이터가 100개로 limit에 맞게 들어온 것을 확인했습니다.  
 하지만 일반적인 비관적, 낙관적 락만으로는 동시성 제어가 부족함을 알 수 있었습니다.
 
-<p style="text-align: center; margin: 50px 0">
-  <img src="/assets/post_images/database/deadlock_issue_6.jpg">
-</p>
+<img src="/assets/post_images/database/deadlock_issue_6.jpg">
 
 동시접속자 수가 10만일 때, 스레드 병목현상이 발생하는 것을 볼 수 있습니다. 그래도 데이터는 100개만 들어오는 것으로 정합성은 지켜지는 것을 확인할 수 있었습니다.
 <span style="background-color:#fff5b1">하지만 트래픽이 높아지니 분산락에도 이슈가 발생했습니다. Redis 서버 연결 확인을 위해 ping을 했을 때 pong 응답이 와야하는데 서버가 제대로 작동을 하지 못해 발생하는 문제였습니다.</span>
