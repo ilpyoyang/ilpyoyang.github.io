@@ -1,14 +1,9 @@
 ---
-title: study log
-author: ilpyo
-date: 2024-10-10 11:33:00 +0900
-categories: [Kotlin]
-tags: [Kotlin, 스터디]
-pin: false
-math: true
-mermaid: true
-published: false
+# the default layout is 'page'
+icon: fas fa-book
+order: 4
 ---
+
 
 > 나는 언제 어떤 공부를 균일하게 꾸준히 하고 있는가?  
 > (2023년 이후 책/스터디/인강 등 학습내용을 기준으로 표기)
@@ -298,6 +293,3 @@ published: false
     
 }
 </style>
-
-
-  
