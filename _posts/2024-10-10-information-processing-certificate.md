@@ -2,8 +2,8 @@
 title: 정보처리기사 실기 전체 내용정리와 기출 자료 한 번에 살펴보기
 author: ilpyo
 date: 2024-10-10 11:33:00 +0900
-categories: [Certificate]
-tags: [정보처리기사]
+categories: [CS]
+tags: [정보처리기사, 자격증, 스터디]
 pin: false
 math: true
 mermaid: true
