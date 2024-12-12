@@ -1,13 +1,12 @@
 ---
 title: 한 번에 알아보는 AWS
 author: ilpyo
-date: 2024-10-17 11:33:00 +0900
+date: 2024-10-12 11:33:00 +0900
 categories: [Cloud, AWS]
 tags: [AWS, 스터디, AWS Certified Developer Associate, 자격증]
 pin: false
 math: true
 mermaid: true
-published: false
 ---
 
 AWS에는 다양한 리전이 있는데 서비스나 사용자가 많은 위치로 지정해주면 됩니다. [region table 참조](https://aws.amazon.com/ko/about-aws/global-infrastructure/regional-product-services/)
