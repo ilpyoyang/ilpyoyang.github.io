@@ -90,6 +90,12 @@ Postgres, MySQL와 호환되는 고성능의 RDS로 지원합니다. Aurora는 M
 - 비용이 RDS보다 높습니다.
 - Aurora DB Cluster에서 Writer Endpoint로 Master DB와 Reader Endpoint로 Reader DB들과 연결할 수 있습니다. 
 
+### RDS Proxy
+RDS Proxy를 RDS와 Aurora에서 사용할 수 있는데 데이터베이스에 직접 연결하지 않고 프록시에 연결하게 되므로 데이터베이스 효율성이 높여줍니다. 그리고 RDS와 Aurora의 failover 시간을 줄여주고
+IAM 인증과 보안 관리를 AWS Secret Manager에서 가능하게 합니다.
+또한 RDS Proxy는 VPC에서만 연결할 수 있기 때문에 보안상 안전합니다.
 
-
+### ElastiCache
+캐시 히트가 발생하면 ElastiCache에서 직접 데이터를 가지고 오고 캐시 미스가 발생하면 데이터베이스에서 데이터를 가지고 옵니다. 그리고 다시 ElastiCache에 캐시를 저장하게 됩니다.
+이렇게 하면 직접 데이터베이스 조회 없이 ElastiCache로 확인할 수 있기 때문에 부하가 줄고, 빈번하게 조회되는 데이터에 대해서 더 빠르게 데이터를 가지고 올 수 있다는 장점이 있습니다.
 
