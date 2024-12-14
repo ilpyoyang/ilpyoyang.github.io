@@ -1,5 +1,5 @@
 ---
-title: 2부. 한 번에 알아보는 AWS - ELB, ASG, RDS, Aurora
+title: 2부. 한 번에 알아보는 AWS - ELB, ASG, RDS, Aurora, ElastiCache
 author: ilpyo
 date: 2024-10-13 11:33:00 +0900
 categories: [Cloud, AWS]
@@ -75,7 +75,7 @@ SSL은 소켓 계층에서 암호화 연결이 되지만, TLS에서는 전송계
 RDS, Aurora의 Audit log는 CloudWatch로 전달해서 더 오랜 기간 보관할 수 있습니다.
 
 ### RDS
-관계형 데이터베이스로 Postgres, MySQL 등을 제공합니다.
+관계형 데이터베이스로 <span style="background-color:#fff5b1">MySQL, PostgreSQL, MariaDB, Oracle, MS SQL Server, Amazon Aurora</span>를 제공합니다.
 - 지속적인 백업과 복원을 제공합니다.
 - 모니터링도 제공하나 SSH는 불가합니다.
 - Auto Scaling을 제공합니다.
@@ -98,4 +98,24 @@ IAM 인증과 보안 관리를 AWS Secret Manager에서 가능하게 합니다.
 ### ElastiCache
 캐시 히트가 발생하면 ElastiCache에서 직접 데이터를 가지고 오고 캐시 미스가 발생하면 데이터베이스에서 데이터를 가지고 옵니다. 그리고 다시 ElastiCache에 캐시를 저장하게 됩니다.
 이렇게 하면 직접 데이터베이스 조회 없이 ElastiCache로 확인할 수 있기 때문에 부하가 줄고, 빈번하게 조회되는 데이터에 대해서 더 빠르게 데이터를 가지고 올 수 있다는 장점이 있습니다.
+- Redis는 multi-AZ에 복제 데이터베이스를 만들 수 있습니다. 그리고 AOF(Append-On-File) 영속성을 이용해 데이터 지속성도 지원합니다.
+- Memcached는 여러 노드로 데이터를 샤딩해서 관리할 수 있습니다. 데이터 지속성이 없고, 복제를 이용한 고가용성을 제공하지 않습니다. 멀티 스레드를 지원합니다.
+- 참고로 Redis-compatable API를 이용해서 인메모리 고성능을 제공하는 `Amazon MemoryDB`도 있습니다.
+- <span style="background-color:#fff5b1">5 Read Replicas you can add in an ElastiCache Redis Cluster with Cluster-Mode-Disabled</span>
+- <span style="background-color:#fff5b1">Read Replica uses Asynchronous Replication and Multi-AZ uses Synchronous Replication</span>
 
+#### ElastiCache Strategy
+- 캐싱을 하는 것이 좋은가?
+- 보안이 갖춰져 있는가?
+- 캐싱을 하기 위한 데이터 설계가 되어 있는가?
+- 어떤 캐싱 모델을 사용할 것인가?
+
+##### lazy loading / cache aside / lazy population
+캐시 미스일 경우 RDS에서 읽어오고 다시 캐시를 쓰는데 이 과정에서 지연 로딩으로 보이는 사용자 경험이 생길 수 있습니다.
+
+##### write through
+데이터를 쓸 때, RDS와 캐시에 둘 다 쓰는 것을 말합니다. 데이터가 RDS와 캐시가 일치하지 않을 수도 있기 때문에 lazy loading 전략을 함께 사용할 수도 있습니다.
+읽히지 않을 캐시들이 많이 생성될 수 있다는 단점이 있습니다.
+
+##### cache evictions and ttl
+캐시를 명시적으로 삭제하거나 시간이 일정기간 지난 캐시는 삭제되도록 할 수 있습니다.
