@@ -133,6 +133,13 @@ EC2 Capacity Reservations은 On-Demand처럼 청구되나 운영여부와 상관
 - 많은 ISP(Internet Service Provider)들은 아직 IPv6를 지원하지 않습니다.
 - IPAM으로 Amazon에서 사용되는 IP들를 관리할 수 있습니다.
 
+### EC2 Instance Metadata (IMDS)
+EC2 Instance Metadata를 볼 수 있는데 IMDSv1은 http://169.254.169.254/latest/meta-data 로 연결해서 확인이 가능하고 IMDSv2는 세션 토큰을 얻어서 http://169.254.169.254/latest/meta-data/profile 과 같은 방식으로 접근이 가능합니다.
+- 2024년 중반부터 새로 출시되는 Amazon EC2 인스턴스 유형은 EC2 인스턴스 메타데이터 서비스의 버전 2([IMDSv2](https://aws.amazon.com/ko/blogs/security/defense-in-depth-open-firewalls-reverse-proxies-ssrf-vulnerabilities-ec2-instance-metadata-service/))만 사용할 예정입니다. 
+```shell
+TOKEN=`curl -X PUT "http://169.254.169.254/latest/api/token" -H "X-aws-ec2-metadata-token-ttl-seconds: 21600"`
+curl http://169.254.169.254/latest/meta-data/profile -H "X-aws-ec2-metadata-token: $TOKEN"
+```
 
 ## EC2 Instance Storage
 > EBS, AMI, EFS
@@ -164,8 +171,16 @@ EBS를 스냅샷을 통해 다른 AZ에 복원시켜서 사용할 수 있습니�
   - EBS `io 1`  또는 `io 2` 볼륨을 제외하고는 EBS와 달리 여러 인스턴스에 연결할 수 있다는 특징이 있습니다.
   - EBS에 비해 더 가격이 높으나 저장소 계층으로 비용 절감이 가능합니다.
 
-
-
+## ETC
+### AWS Limits(Quotas) and Exponential Backoff
+- API Rate Limits
+  - DescribesInstance API for EC2 limit of 100 calls/sec
+  - GetObject on S3 limit of 500 calls/sec
+- Service Quotas
+  - On-Demand Standard Instances 1152 vCPU
+- Exponential Backoff
+  - ThrottlingException이 발생하는 경우 5xx 에러에 대해 재시도를 구성할 수 있습니다.
+  - 같은 요청이 왔을 때 기하급수적인 지연을 발생시킬 수 있도록 구성합니다.
 
 
 
