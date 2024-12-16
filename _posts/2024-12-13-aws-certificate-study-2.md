@@ -14,6 +14,8 @@ mermaid: true
 - Horizontal Scalability - distributed system
 - High Availability - more than 2 AZ
 
+---
+
 ## ELB
 > ALB, NLB, GWLB, Sticky Sessions
 
@@ -68,6 +70,8 @@ SSL은 소켓 계층에서 암호화 연결이 되지만, TLS에서는 전송계
 - Scaling Cooldowns으로 300sec default 값을 갖습니다.
 - 정책에 따른 CPU 기준을 넘어서는 사용이 발생해도 설정한 `maximum capacity`를 증가시키지 않습니다.
 - CloudWatch 알림에 따른 스케일 아웃을 설정할 수 있습니다.
+
+---
 
 ## Database
 > RDS, Aurora, ElastiCache

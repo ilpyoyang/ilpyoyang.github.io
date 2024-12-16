@@ -125,6 +125,8 @@ Object의 변화에 따라 Event Notifications를 발생시킬 수 있습니다.
 Lambda Function을 이용해서 S3에서 기존 데이터베이스 정보를 추가하거나 일부 데이터를 수정해서 S3 Object Lambda Access Point를 이용해서 전달할 수 있습니다.
 수정을 위해 새로운 Bucket을 만들지 않아도 된다는 장점이 있습니다.
 
+---
+
 ## CloudFront
 CDN이라고 생각하면 됩니다. 요청에서 가까운 지역의 CloudFront를 거쳐 S3 데이터를 가지고 오도록 하며, S3 Cross Region Replication과 달리 Bucket의 복제가 일어나지 않습니다.
 그리고 정적 콘텐츠를 전세계 어디서나 요청해서 받아볼 수 있다는 장점이 있습니다.
