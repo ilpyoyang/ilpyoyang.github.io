@@ -21,6 +21,7 @@ AWS 계정을 사용할 권한을 그룹으로 묶어서 역할을 지정하는�
 - <span style="background-color:#fff5b1">IAM 그룹은 사용자를 포함하지만 그룹을 포함하지는 않습니다.</span>
 
 Sign in IAM user로 로그인한 경우에는 오른쪽 상단에 IAM User 정보가 있음을 알 수 있습니다.
+
 #### IAM Policies Structure
 정책 구조에서 IAM에서 여떤 역할을 가지고 있고, 유효한지 여부 등을 확인할 수 있습니다. Statement는 Version을 포함하지는 않고 Effect, Action, Resource, Principle을 포합합니다.
 ```
@@ -41,6 +42,7 @@ Sign in IAM user로 로그인한 경우에는 오른쪽 상단에 IAM User 정�
 #### IAM Roles
 역할을 생성할 수도 있는데 서비스, 계정 등에 대해 역할을 선택할 수 있고, 권한을 설정해서 역할을 만들 수 있습니다. 예를 들어 서비스, EC2의 IAMReadOnlyAccess와 같이 권한을 지정한 'NewRole'을 만들 수 있는 셈이죠.
 - Access Provider를 통해 현재 권한 설정과 IAM 관리에 대해 살펴볼 수 있습니다.
+
 #### IAM 접근 보안을 위한 정책 제공
 - IAM Password Policy
   - 암호를 어떻게 정하게 할지
@@ -56,6 +58,7 @@ Sign in IAM user로 로그인한 경우에는 오른쪽 상단에 IAM User 정�
 - 강력한 비밀번호 정책을 사용합니다.
 - [IAM 접근 보안을 위한 정책](# IAM 접근 보안을 위한 정책 제공)을 활용합니다.
 - IAM user와 Access Key를 공유하지 않습니다.
+
 ### AWS CLI
 AWS 로그인 방식에는 password+MFA를 사용하는 방식, CLI, SDK를 이용하는 방식들이 있습니다.
 
@@ -125,6 +128,7 @@ Dedicated Hosts는 전체 물리적 서버를 호스트가 사용하는 형태�
 - <span style="background-color:#fff5b1">데이터베이스 기술 배포로 물리적 코어와 네트워크 소켓 가시성이 필요한 경우</span>
   - 컴퓨팅 시스템에서 네트워크 통신을 수행하는 끝점(endpoint)인 소켓에 대한 상호작용을 관찰하고 모니터링하는 능력
   - on-demand에서는 가상화된 환경에서 작용하기 때문에 세부적 통제가 어려울 수 있습니다.
+
 #### Capacity Reservations
 EC2 Capacity Reservations은 On-Demand처럼 청구되나 운영여부와 상관없이 비용이 부과되기 때문에 짧은 기간 특정 지역에서 사용할 경우에 적합합니다  Reserved 또는 Saving Plans과 결합해 사용할 수 있습니다.
 
@@ -133,6 +137,7 @@ EC2 Capacity Reservations은 On-Demand처럼 청구되나 운영여부와 상관
 - 모든 인스턴스는 프리티어 기간 동안 total 750hr/month까지 무료이며 그 이상 사용분에 대해서는 비용이 발생합니다.
 - LB에 경우에는 지역당 하나 IPv4 address를 가질 수 있으며, 프리티어를 제공하지 않습니다.
 - RDS Database는 하나의 IPv4 address를 가질 수 있으며, 프리티어를 제공하지 않습니다.
+
 #### 추가 참고사항
 - 많은 ISP(Internet Service Provider)들은 아직 IPv6를 지원하지 않습니다.
 - IPAM으로 Amazon에서 사용되는 IP들를 관리할 수 있습니다.
@@ -140,6 +145,7 @@ EC2 Capacity Reservations은 On-Demand처럼 청구되나 운영여부와 상관
 ### EC2 Instance Metadata (IMDS)
 EC2 Instance Metadata를 볼 수 있는데 IMDSv1은 http://169.254.169.254/latest/meta-data 로 연결해서 확인이 가능하고 IMDSv2는 세션 토큰을 얻어서 http://169.254.169.254/latest/meta-data/profile 과 같은 방식으로 접근이 가능합니다.
 - 2024년 중반부터 새로 출시되는 Amazon EC2 인스턴스 유형은 EC2 인스턴스 메타데이터 서비스의 버전 2([IMDSv2](https://aws.amazon.com/ko/blogs/security/defense-in-depth-open-firewalls-reverse-proxies-ssrf-vulnerabilities-ec2-instance-metadata-service/))만 사용할 예정입니다. 
+
 ```shell
 TOKEN=`curl -X PUT "http://169.254.169.254/latest/api/token" -H "X-aws-ec2-metadata-token-ttl-seconds: 21600"`
 curl http://169.254.169.254/latest/meta-data/profile -H "X-aws-ec2-metadata-token: $TOKEN"
@@ -154,11 +160,14 @@ curl http://169.254.169.254/latest/meta-data/profile -H "X-aws-ec2-metadata-toke
 EBS 볼륨은 네트워크 드라이브입니다. 특정 가용영역에 사용되며, 스냅샷으로 볼륨을 이동할 수 있습니다. CCP level에서 한 번에 한 인스턴스에만 마운트될 수 있습니다.
 - EC2 종료시 EBS 설정에 따라 사용을 중단할 수 있습니다. - `Delete on Termination`
 - Make an Amazon EBS volume available for use on Linux
+
 ##### EBS Snapshots
 EBS를 스냅샷을 통해 다른 AZ에 복원시켜서 사용할 수 있습니다. 이 때, 스냅샷을 Archive에 관리하게 되면 75% 저렴하다는 이점이 있습니다. 스냅샷을 삭제한 경우에도 Recycle Bin에서 복원이 가능합니다. Fast Snapshot을 이용한 복원도 있는데 이 경우에는 돈이 많이 들지만 큰 스냅샷을 빠르게 복원할 수 있다는 장점이 있습니다.
+
 ##### EBS Volume Types
 - gp3는 gp2와 달리 볼륨 사이즈와 IOPS(초당 입출력 작업 수)와 별개로 독립적으로 설정될 수 있습니다.
 - gp2는 IOPS의 크기가 볼륨 크기에 따라 자연스럽게 증가되는 구조입니다. 즉 직접적으로 연결(link)되어 있다고 표현합니다.
+
 ##### EBS Multi-Attach
 `io 1`  또는 `io 2` 볼륨에 경우에는 다중 연결로 같은 가용영역 내에서 여러 인스턴스(<span style="background-color:#fff5b1">16개 한도</span>)에 EBS 볼륨을 연결할 수 있습니다.
 

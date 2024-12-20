@@ -15,6 +15,7 @@ Elastic Beanstalk는 웹 애플리케이션 및 서비스의 배포 및 조정�
 - Application, Application Version, Environment(Worker, Web-Server)으로 구성
 - 다양한 언어를 제공
 - Elastic Beanstalk을 설정하면 CloudFormation에서 생성된 이벤트 확인가능
+
 ### Rolling updates and deployments
 - `AllAtOnce` - 모든 인스턴스에 한 번에 배포, 가장 빠르지만 무중단 배포는 불가능한 방식
 - `Rolling` - 표준 롤링 배포방식
@@ -23,6 +24,7 @@ Elastic Beanstalk는 웹 애플리케이션 및 서비스의 배포 및 조정�
 - `TrafficSplitting`- 트래픽 분할 배포를 수행하여 애플리케이션 배포를 Canary 테스트 진행
 
 ![elastic-beanstalk-deploy-options](https://github.com/user-attachments/assets/cf13fcc0-864a-4562-a702-532559a04030)
+
 ### Lifecycle Policy
 1000개 애플리케이션 버전을 저장할 수 있고, 이후 다른 버전을 만들기 위해서는 이전 버전을 삭제해야 합니다. Lifecycle Policy을 통해 이전 버전을 어떻게 관리할 것인지 정할 수 있습니다.
 - limit by total count
@@ -81,8 +83,10 @@ Template을 S3에 업로드 하면 이 내용을 바탕으로 CloudFormation에�
 - [Template를 만드는 방법](https://docs.aws.amazon.com/ko_kr/AWSCloudFormation/latest/UserGuide/template-guide.html)은 여러가지 있는데 인프라 컴포저나 Designer를 이용한 방법과 직접 Template을 작성하는 방법이 있습니다.
 
 ### CloudFormation 설정
+
 #### Resources
 Template을 구성하는 핵심요소로 `service-privider::service-name::data-type-name`으로 표기됩니다. (ex. `AWS::EC2::Instance`) 모든 리소스를 지원하지는 않습니다.
+
 #### Parameters
 예를 들어 인스턴스를 만들 때도 어떤 인스턴스를 선택할지 `AllowedValues`라는 값을 두어 타입을 정할 수 있습니다. 파라미터 값으로 레퍼런스를 둘 때는 `!Ref`와 같은 표현을 앞에 두어 참고하게 할 수 있습니다.
 템플릿에서 Pseudo 파라미터 값을 갖는 경우 기본값으로 그 값을 갖게 됩니다.
@@ -134,26 +138,31 @@ Resources:
     Type: "AWS::EC2::Instance"
     Condition: CreateProdResources
 ```
-#### Intrinsic Functions
+#### Intrinsic Functions
 - `!Ref` - 참조를 해야 하는 경우
 - `!GetAtt` - 특정 리소스의 값을 가지고 와야하는 경우
-- `!FindInMap` - Mapping 값에서 특정 내용을 찾는 경우
-- `!ImportValue` - 다른 스택에서 값을 가지고 오는 경우
+- `!FindInMap` - Mapping 값에서 특정 내용을 찾는 경우
+- `!ImportValue` - 다른 스택에서 값을 가지고 오는 경우
 - `!Base64` - Base64 암호처리가 필요한 경우
+
 #### Rollbacks
 스택 생성이나 업데이트 시에  실패에 대한 대처를 Rollback으로 실행할 수 있습니다. 모두 되돌리거나 실패한 스택만 되돌리는 방법을 선택할 수 있습니다.
+
 #### Service Role
 Service Role은 스택에 리소스를 생성, 업데이트 등 작업을 할 수 있도록 부여하는 것입니다. 이 기능을 사용하기 위해서 사용자는 반드시 `iam:PassRole` 권한을 가지고 있어야 합니다.
+
 #### Capabilities
 템플릿에 IAM 설정에 대한 요구를 필요로 하는 경우 Capabilities에서 IAM 리소스 생성에 대한 동의 과정을 거쳐야 합니다.
 - `CAPABILITY_IAM`
 - `CAPABILITY_NAMED_IAM`
+
 #### Policy
-##### Deletion Policy
+
+##### Deletion Policy
 - `Delete` - 템플릿 삭제나 리소스 제거를 위해서 사용. 기본값.
 - `Retain` - 리소스를 CloudFormation 삭제시에도 보존하는 것으로 하는 세팅입니다.
 - `Snapshot` - 삭제 전 리소스 스냅샷을 만드는 설정.
-##### Stack Policy
+##### Stack Policy
 어떤 Action에 대해 리소스별 설정으로 스택에서 처리여부를 결정할 수 있도록 하는 것을 말합니다. 아래 json에서 보면 `LogicalResourceId/ProductionDatabase`에 대해서는 업데이트를 막는 것을 알 수 있습니다.
 ```
 {
@@ -173,9 +182,12 @@ Service Role은 스택에 리소스를 생성, 업데이트 등 작업을 할 �
   ]
 }
 ```
+
 #### Termination Protection
 실수로 스택을 삭제를 하는 경우를 방지하기 위해서 삭제시 Termination Protection 여부를 비활성으로 바꿔야 삭제가 가능하도록 하는 조치입니다.
+
 #### Custom Resources
 사례로 들면, 스택을 지울 때 S3에 Object가 있으면 리소스 삭제가 되지 않습니다. 따라서 이럴 때는 Custom Resources을 이용해서 람다로 bucket을 비우고 스택 삭제가 바르게 실행될 수 있도록 할 수 있습니다.
+
 #### StackSets
 여러 지역에 같은 스택을 만들고 싶을 때 StackSets을 만들어서 target에 스택을 만들 수 있습니다. 

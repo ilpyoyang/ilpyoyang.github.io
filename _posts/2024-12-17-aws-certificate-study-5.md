@@ -22,9 +22,10 @@ ECS는 아마존의 컨테이너 플랫폼으로 ECS Cluster에서 ECS Tasks를 
 - EFS로 EC2 Instance 또는 Fargate에 마운트해서 ECS tasks로 사용할 수 있습니다.
   - <span style="background-color:#fff5b1">S3의 마운트는 불가능합니다.</span>
 
-![](https://docs.aws.amazon.com/ko_kr/AmazonECS/latest/developerguide/images/ecs-lifecycle.png)
+![ECS](https://docs.aws.amazon.com/ko_kr/AmazonECS/latest/developerguide/images/ecs-lifecycle.png)
 
 ### ECS Tasks
+
 #### Task Definition
 Task Definition을 이용해서 각각의 역할을 지정할 수 있습니다. Task Definition은 json 형태의 메타데이터로 어떻게 컨테이너를 돌릴지에 대한 내용을 담고 있습니다.
 - 이미지 이름
@@ -37,6 +38,7 @@ Task Definition을 이용해서 각각의 역할을 지정할 수 있습니다. 
 - 로깅에 대한 설정(ex. CloudWatch)
   - Bind Mount로 Storage를 공유해서 컨테이너가 같이 사용할 수 있습니다.
   - 또 이 로그 정보를 Sidecar 컨테이너에서 사용할 수도 있습니다.
+
 #### Task Placements
 어떤 EC2 인스턴스에 task를 위치할 것인지에 대해 설정하는 부분입니다. Task Placements에도 다양한 전략들이 있습니다. 이 전략들은 혼합해서 사용할 수 있습니다.
 - `Binpack` - 하나의 인스턴스를 다 채운 다음에 다른 인스턴스에 task를 두는 방식입니다. (비용절감 방식)
@@ -77,7 +79,8 @@ AWS에서 제공하는 CLI 툴로 서비스는 아닙니다. Copilot을 이용�
 
 ## EKS(Elastic Kubernetes Service)
 쿠버네티스 클러스터를 쉽게 만들고 관리할 수 있는 서비스입니다. Kubernetes는 컨테이너화된 애플리케이션의 배포, 관리 및 확장을 자동화하는 오픈소스 시스템으로, EKS는 이를 AWS 클라우드 환경에서 손쉽게 사용할 수 있도록 해줍니다.
-![](https://d1.awsstatic.com/product-page-diagram_Amazon-EKS%402x.ddc48a43756bff3baead68406d3cac88b4151a7e.ddc48a43756bff3baead68406d3cac88b4151a7e.png)
+![EKS](https://d1.awsstatic.com/product-page-diagram_Amazon-EKS%402x.ddc48a43756bff3baead68406d3cac88b4151a7e.ddc48a43756bff3baead68406d3cac88b4151a7e.png)
+
 ### Node Types
 - Managed Node Groups - 노드 생성과 관리를 제공
 - Self-Managed Nodes - 사용자에 의한 노드 생성
