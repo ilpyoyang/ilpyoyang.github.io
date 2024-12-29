@@ -67,7 +67,7 @@ class PasswordValidator implements ConstraintValidator<Password, String> {
 
 
 
-### 문제원인 파악하기### 
+### 문제원인 파악하기
 1. .yml 값 등록이 바르게 들어오는 것을 확인했습니다.
 2. PasswordValidator 클래스는 @Component 설정된 상태입니다.
 3. 에러 디버깅 ```YamlProcessor``` 찍어보기

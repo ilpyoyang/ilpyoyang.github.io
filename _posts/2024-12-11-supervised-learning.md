@@ -9,16 +9,12 @@ math: true
 mermaid: true
 ---
 
-**베이스 모델**  
+### 베이스 모델
 성능 측정의 기준이 되는 모델로 참조 지점으로 사용되는 단순한 모델 또는 휴리스틱을 말합니다. 머신러닝 모델이 의미있게 하는 가장 최소한의 성능을 제공하는 모델입니다.  
 참고로 <span style="background-color:#fff5b1">휴리스틱이란, 시간이나 정보가 불충분해 합리적인 판단을 할 수 없거나 체계적이고 합리적인 판단이 필요없는 경우 신속하게 사용하는 어림짐작의 기술</span>입니다.
 
-<br> 
-
-**분류**  
+### 분류  
 예측해야할 대상의 개수가 정해져 있는 문제를 말합니다. 예를 들어, 동물의 분류거나 이진 분류 값을 원하는 문제가 해당됩니다.
-
-![confusion_matrix.png](https://private-user-images.githubusercontent.com/67682215/333499957-bb9b6124-f6c4-4f2f-957d-4c80fb8fff9f.png?jwt=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJnaXRodWIuY29tIiwiYXVkIjoicmF3LmdpdGh1YnVzZXJjb250ZW50LmNvbSIsImtleSI6ImtleTUiLCJleHAiOjE3MTY1Mzc0NzMsIm5iZiI6MTcxNjUzNzE3MywicGF0aCI6Ii82NzY4MjIxNS8zMzM0OTk5NTctYmI5YjYxMjQtZjZjNC00ZjJmLTk1N2QtNGM4MGZiOGZmZjlmLnBuZz9YLUFtei1BbGdvcml0aG09QVdTNC1ITUFDLVNIQTI1NiZYLUFtei1DcmVkZW50aWFsPUFLSUFWQ09EWUxTQTUzUFFLNFpBJTJGMjAyNDA1MjQlMkZ1cy1lYXN0LTElMkZzMyUyRmF3czRfcmVxdWVzdCZYLUFtei1EYXRlPTIwMjQwNTI0VDA3NTI1M1omWC1BbXotRXhwaXJlcz0zMDAmWC1BbXotU2lnbmF0dXJlPWJmN2MxYTQxMDMzYzE2MTZmNDExMmNmMmFhYzA3OWNiZDEyNGYwMWJhYWNlNTcwOGYwYjM2ZGNjNmFmZmU3NjImWC1BbXotU2lnbmVkSGVhZGVycz1ob3N0JmFjdG9yX2lkPTAma2V5X2lkPTAmcmVwb19pZD0wIn0.LtHK-LnizvHFDdZA4P_Btz-cXzkAJrhbQm9ISo2qdcA)
 
 <span style="background-color:#fff5b1">Confusion Matrix, 오차행렬</span>이란 Traning을 통한 Prediction 성능을 측정하기 위해 예측값과 실제값을 비교하기 위한 표입니다. 여기서 ```True/False```는 관심 범주의 여부를 의미하고 ```Positive/Negative```는 분류를 제대로 했는지 여부를 의미한다. 이 정보를 바탕으로 ```Accuracy```, ```Parecision```, ```Recall``` 3가지 척도를 평가할 수 있습니다.
 1. <span style="background-color:#FFE6E6">Accuracy, 정확도</span>  
@@ -35,9 +31,7 @@ mermaid: true
 5. <span style="background-color:#FFE6E6">AUC(Area Under Curve)</span>    
    ROC 곡선의 아래 curve의 밑면적으로 0~1 사이의 값을 갖습니다. 1에 가까울수록 예측을 잘하는 모델이라고 할 수 있습니다.
 
-<br> 
-
-**회귀**  
+### 회귀
 예측해야할 대상이 <span style="background-color:#fff5b1">연속적인 숫자</span>인 문제를 말합니다. 주어진 데이터를 가지고 날씨나 부동산 시세를 예측하는 것을 회귀의 예로 들 수 있습니다.
 
 ---
