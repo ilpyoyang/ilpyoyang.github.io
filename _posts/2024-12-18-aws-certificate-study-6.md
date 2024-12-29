@@ -21,7 +21,7 @@ Elastic Beanstalk는 웹 애플리케이션 및 서비스의 배포 및 조정�
 - `Rolling` - 표준 롤링 배포방식
 - `RollingWithAdditionalBatch`- 배포를 시작 전, 인스턴스의 추가 배치로 전체 용량을 유지
 - `Immutable`- 모든 배포에 대해변경 불가능한 업데이트를 수행
-- `TrafficSplitting`- 트래픽 분할 배포를 수행하여 애플리케이션 배포를 Canary 테스트 진행
+- `TrafficSplitting`- 트래픽 분할 배포를 수행하여 애플리케이션 배포를 <span style="background-color:#fff5b1">Canary 테스트 진행</span>
 
 ![elastic-beanstalk-deploy-options](https://github.com/user-attachments/assets/cf13fcc0-864a-4562-a702-532559a04030)
 
