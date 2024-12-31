@@ -14,12 +14,14 @@ DynamoDB는 NoSQL 데이터베이스로 여러 AZ를 지원하고 AWS에서 완�
 - 기본키 전략은 파티션 키(HASH)를 사용하는 방법과 파티션 키(HASH)와 정렬 키를 같이 사용하는 방법이 있습니다.
 - DynamoDB는 [PartiQL](https://docs.aws.amazon.com/ko_kr/amazondynamodb/latest/developerguide/ql-functions.html)을 쿼리 언어로 사용합니다.
 - TTL은 WCU를 소모하지 않습니다. (추가 비용이 발생하는 부분이 아님) - [epoch Converter](https://www.epochconverter.com/)
-- `--projection-expression`를 CLI에서 사용해서 일부 속성을 가지고 올 수 있습니다.
+  - expired item에 대해 48시간 내에 삭제가 자동으로 진행됩니다.
 - S3에 큰 데이터를 담고 그 메타데이터를 DynamoDB에 저장하는 방식을 이용할 수 있습니다.
 - IAM에 의해 완전히 제어가 가능합니다.
+- <span style="background-color:#fff5b1">테이블의 아이템 최대 크기는 400KB입니다.</span>
 
 ### Capacity with RCU & WCU
 Provisioned는 기본값으로 free tier를 제공합니다. 미리 계획한 프로비저닝 용량에 대한 비용을 지불해야 합니다. On-Demand 모드는 사용자의 작업에 따라 자동으로 스케일 업/다운이 발생하기 때문에 프로비저닝이 별도 필요하지 않지만 비용이 훨씬 더 비쌉니다. 예측 불가능한 경우에 사용할 것을 권장합니다. 24시간 마다 다른 모드로의 전환이 가능합니다. 
+- <span style="background-color:#fff5b1">테이블 스케일링은 수직적입니다.</span>
 
 #### Burst Capacity
 Burst Capacity가 있기 때문에 Provisioned 모드에서도 초과하는 용량에 대해 RCU(Read Capacity Units), WCU(Write Capacity Units) 처리가 가능합니다. `ProvisionedThroughputExceededException`이 발생하면 Burst Capacity가 다 사용되었다는 의미입니다.
@@ -68,6 +70,10 @@ aws dynamodb delete-item \
 
 #### Copying DynamoDBTable
 AWS Data Pipeline으로 AWS EMR Cluster를 실행하고 여기서 테이블을 읽어서 S3에 데이터를 쓰는 방식을 이용할 수 있습니다. 또는 Backup, Scan + PutItem / BatchWriteItem 을 이용하는 방식도 있습니다. 
+
+#### CLI
+- `--projection-expression`를 CLI에서 사용해서 일부 속성을 가지고 올 수 있습니다.
+- `--starting-token`를 이용해 다음 페이지로 이동할 수 있습니다.
 
 ### Index
 #### Local Secondary Index (LSI)
