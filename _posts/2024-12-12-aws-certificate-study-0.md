@@ -9,6 +9,8 @@ math: true
 mermaid: true
 ---
 
+AWS 학습을 하면서 정리한 내용으로 제시된 예시 코드와 이미지는 모두 AWS Docs에 출처를 두고 있습니다.
+
 - [한 번에 알아보는 AWS 시작하며](/posts/aws-certificate-study-0/)
 - [1부. 한 번에 알아보는 AWS - IAM, EC2, EC2 Instance Storage](/posts/aws-certificate-study-1/)
 - [2부. 한 번에 알아보는 AWS - ELB, ASG, RDS, Aurora, ElastiCache](/posts/aws-certificate-study-2/)
@@ -19,6 +21,8 @@ mermaid: true
 - [7부. 한 번에 알아보는 AWS - SQS, SNS, Kinesis](/posts/aws-certificate-study-7/)
 - [8부. 한 번에 알아보는 AWS - CloudWatch, CloudTrail](/posts/aws-certificate-study-8/)
 - [9부. 한 번에 알아보는 AWS - Lambda](/posts/aws-certificate-study-9/)
+- [9부. 한 번에 알아보는 AWS - DynamoDB](/posts/aws-certificate-study-10/)
+- [9부. 한 번에 알아보는 AWS - API Gateway, CICD](/posts/aws-certificate-study-11/)
 
 
 
