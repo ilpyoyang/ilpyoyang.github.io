@@ -21,8 +21,8 @@ AWS 학습을 하면서 정리한 내용으로 제시된 예시 코드와 이미
 - [7부. 한 번에 알아보는 AWS - SQS, SNS, Kinesis](/posts/aws-certificate-study-7/)
 - [8부. 한 번에 알아보는 AWS - CloudWatch, CloudTrail](/posts/aws-certificate-study-8/)
 - [9부. 한 번에 알아보는 AWS - Lambda](/posts/aws-certificate-study-9/)
-- [9부. 한 번에 알아보는 AWS - DynamoDB](/posts/aws-certificate-study-10/)
-- [9부. 한 번에 알아보는 AWS - API Gateway, CICD](/posts/aws-certificate-study-11/)
+- [10부. 한 번에 알아보는 AWS - DynamoDB](/posts/aws-certificate-study-10/)
+- [11부. 한 번에 알아보는 AWS - API Gateway, CICD](/posts/aws-certificate-study-11/)
 
 
 
