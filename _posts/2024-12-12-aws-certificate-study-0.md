@@ -23,6 +23,7 @@ AWS 학습을 하면서 정리한 내용으로 제시된 예시 코드와 이미
 - [9부. 한 번에 알아보는 AWS - Lambda](/posts/aws-certificate-study-9/)
 - [10부. 한 번에 알아보는 AWS - DynamoDB](/posts/aws-certificate-study-10/)
 - [11부. 한 번에 알아보는 AWS - API Gateway, CICD](/posts/aws-certificate-study-11/)
+- [12부. 한 번에 알아보는 AWS - SAM, CDK, Cognito, Other Serverless Services](/posts/aws-certificate-study-12/)
 
 
 
