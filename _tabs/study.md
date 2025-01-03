@@ -4,10 +4,15 @@ icon: fas fa-book
 order: 3
 ---
 
+## 2025
+
+##### 2025.01
+- 자바에서 코틀린으로
+
 ## 2024
 
 ##### 2024.12
-- 자바에서 코틀린으로
+- AWS Certified Developer Associate
 
 ##### 2024.11
 - 제대로 파는 Java
