@@ -9,6 +9,8 @@ math: true
 mermaid: true
 ---
 
+![image](https://github.com/user-attachments/assets/63118a91-7ff5-4b94-a050-83f3c4fd05bf)
+
 AWS 학습을 하면서 정리한 내용으로 제시된 예시 코드와 이미지는 모두 AWS Docs에 출처를 두고 있습니다.
 
 ## 포스팅 내용 리스트
