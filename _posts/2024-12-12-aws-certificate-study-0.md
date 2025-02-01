@@ -33,7 +33,7 @@ AWS 학습을 하면서 정리한 내용으로 제시된 예시 코드와 이미
 - [DVA-C02 대비자료 1 - Server & Serverless](/posts/aws-certificate-review-0/)
 - [DVA-C02 대비자료 2 - Storage](/posts/aws-certificate-review-1/)
 - [DVA-C02 대비자료 3 - Security & Logging & Monitoring](/posts/aws-certificate-review-2/)
-- [DVA-C02 대비자료 4 - Network](/posts/aws-certificate-review-3/)
+- [DVA-C02 대비자료 4 - Network & CICD](/posts/aws-certificate-review-3/)
 - [DVA-C02 대비자료 5 - Event Handling & Data Streaming](/posts/aws-certificate-review-4/)
 
 ## AWS 서비스별 분류

@@ -1,5 +1,5 @@
 ---
-title: DVA-C02 대비자료 4 - Network
+title: DVA-C02 대비자료 4 - Network & CICD
 author: ilpyo
 date: 2025-02-01 00:00:00 +0900
 categories: [Cloud, AWS]
@@ -8,6 +8,8 @@ pin: false
 math: true
 mermaid: true
 ---
+
+## Network
 
 ### VPC
 - 사용자 지정 VPC 라우트 테이블에 S3, DynamoDB에 대한 Gateway Endpoint를 만들어준다.
