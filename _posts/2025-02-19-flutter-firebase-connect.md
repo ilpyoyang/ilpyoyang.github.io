@@ -40,12 +40,21 @@ cocoapods could not find compatible versions for pod "cloud_firestore":
 <img width="997" alt="Image" src="https://github.com/user-attachments/assets/d77fb338-b144-4431-b0d5-a8ee86850e88" />
 
 Android에서 Firebase를 연동하는 과정은 iOS와 유사합니다. Firebase 콘솔에서 Android 앱을 추가한 후, `google-services.json` 파일을 다운로드하여 Flutter 프로젝트의 `android/app` 폴더에 추가합니다. `build.gradle` 파일에서 Firebase와 관련된 플러그인 및 의존성을 추가하는 부분은 ios에서 해주었기 때문에 별도 추가설정은 없습니다.
-`firebase_auth` 설정은 본 설정에서 테스트 모드 적용으로 연동만을 파악하기 때문에 넘어가겠습니다.
+
+그리고 단계에 따라 SDK를 세팅해줍니다. 주어진 코드를 복사에서 해당 위치에 넣어주면 되기 때문에 가이드에 따라 의존성을 넣어줍니다. 추가로 `firebase_auth` 설정은 본 설정에서 테스트 모드 적용으로 연동만을 파악하기 때문에 넘어가겠습니다.
 
 ## 공통사항 
 iOS 연동하기와 Android 연동하기에서 사용된 파일들(`GoogleService-Info.plist`, `google-services.json`)에서 각종 키값을 프로젝트 `main.dart`에 연동을 위해 세팅해줍니다. 
 
 <img width="461" alt="Image" src="https://github.com/user-attachments/assets/0500e062-90bc-4a27-a35f-f223074aac02" />
+
+위 사진에서 `main()` 함수에서 `WidgetsFlutterBinding.ensureInitialized()`는 Flutter 앱이 시작되기 전에 위젯 트리와 관련된 기본 설정을 초기화하는 메서드입니다. 이 메서드는 비동기 작업을 안전하게 처리할 수 있도록 보장합니다. 주로 앱의 초기화 단계에서 비동기 작업을 실행할 때 사용됩니다.
+```dart
+void main() {
+  WidgetsFlutterBinding.ensureInitialized();
+  runApp(const MyApp());
+}
+```
 
 그리고 build에서 데이터를 잘 불러오는지 다음과 같이 확인이 가능합니다.
 ```dart
