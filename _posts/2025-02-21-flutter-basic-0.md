@@ -9,9 +9,9 @@ math: true
 mermaid: true
 ---
 
-Flutter를 이용한 앱 개발 및 스터디를 몇 번 참여하면서 기초 부분학습을 했지만 제대로 정리해서 블로그에 올린 적이 없는 것 같아서 이번 기회에 빠르게 복습하는 것을 목표로 내용을 업데이트하게 되었습니다. 
+Flutter를 이용한 앱 개발 및 스터디를 몇 번 참여하면서 기초 부분학습을 했지만, 제대로 정리해서 블로그에 올린 적이 없는 것 같아서 이번 기회에 빠르게 복습하는 것을 목표로 내용을 업데이트하게 되었습니다. 
 - [Flutter documentation](https://docs.flutter.dev/)
 - [Dart documentation](https://dart.dev/docs)
 
 본 포스팅에는 다음 내용들을 리스트화해서 포스팅했습니다.
-- [Dart 기초문법](/posts/flutter-basic-0)
+- [Dart 기초문법](/posts/flutter-basic-1)
