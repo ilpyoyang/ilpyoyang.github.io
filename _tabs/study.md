@@ -8,9 +8,12 @@ order: 3
 
 | 월 | 활동                                   |
 |--|--------------------------------------|
-| 2월 | 📖 Flutter 앱 제작하기             |
-| 1월 | 📖 자바에서 코틀린으로                  |
-|  | 📖 AWS Certified Developer Associate |
+| 3월 | 🛠️ Dart 프로그래밍                       |
+|  | 📝 빅데이터 분석기사 대비                      |
+|  | ⚙️ 플러터 사이드 프로젝트                      |
+| 2월 | 🛠️ Flutter 기초                       |
+| 1월 | 📖 자바에서 코틀린으로                        |
+|  | 📝 AWS Certified Developer Associate |
 
 ---
 
