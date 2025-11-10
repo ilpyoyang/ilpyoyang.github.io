@@ -27,15 +27,18 @@
       </li>
       <!-- the real tabs -->
       {% for tab in site.tabs %}
-        <li class="nav-item{% if tab.url == page.url %}{{ " active" }}{% endif %}">
-          <a href="{{ tab.url | relative_url }}" class="nav-link">
-            <i class="fa-fw {{ tab.icon }}"></i>
-            {% capture tab_name %}{{ tab.url | split: '/' }}{% endcapture %}
+        {% assign tab_slug = tab.path | split: '/' | last | split: '.' | first %}
+        {% unless tab_slug == 'study' or tab_slug == 'archives' %}
+          <li class="nav-item{% if tab.url == page.url %}{{ " active" }}{% endif %}">
+            <a href="{{ tab.url | relative_url }}" class="nav-link">
+              <i class="fa-fw {{ tab.icon }}"></i>
+              {% assign tab_label = site.data.locales[include.lang].tabs[tab_slug] | default: tab.title %}
 
-            <span>{{ site.data.locales[include.lang].tabs.[tab_name] | default: tab.title | upcase }}</span>
-          </a>
-        </li>
-        <!-- .nav-item -->
+              <span>{{ tab_label | upcase }}</span>
+            </a>
+          </li>
+          <!-- .nav-item -->
+        {% endunless %}
       {% endfor %}
     </ul>
   </nav>

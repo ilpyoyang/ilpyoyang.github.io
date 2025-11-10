@@ -16,3 +16,4 @@ Flutter를 이용한 앱 개발 및 스터디를 몇 번 참여하면서 기초 
 본 포스팅에는 다음 내용들을 리스트화해서 포스팅했습니다.
 - [Dart 기초문법](/posts/flutter-basic-1)
 - [Flutter 비동기 작업 심화](/posts/flutter-basic-2)
+- [Flutter 복습](/posts/flutter-basic-review)
