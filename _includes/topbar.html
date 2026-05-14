@@ -59,19 +59,30 @@
       <i class="fas fa-search fa-fw"></i>
     </button>
 
-    <search id="search" class="align-items-center ms-3 ms-lg-0">
-      <i class="fas fa-search fa-fw"></i>
-      <input
-        class="form-control"
-        id="search-input"
-        type="search"
-        aria-label="search"
-        autocomplete="off"
-        placeholder="{{ site.data.locales[include.lang].search.hint | capitalize }}..."
-      >
-    </search>
-    <button type="button" class="btn btn-link text-decoration-none" id="search-cancel">
-      {{- site.data.locales[include.lang].search.cancel -}}
-    </button>
+    <div class="d-flex align-items-center ms-auto">
+      <search id="search" class="align-items-center">
+        <i class="fas fa-search fa-fw"></i>
+        <input
+          class="form-control"
+          id="search-input"
+          type="search"
+          aria-label="search"
+          autocomplete="off"
+          data-i18n="search.hint"
+          placeholder="{{ site.data.locales[include.lang].search.hint | capitalize }}..."
+        >
+      </search>
+
+      <button
+        type="button"
+        id="lang-toggle"
+        class="btn btn-link text-decoration-none lang-toggle-btn"
+        aria-label="Toggle language"
+      >EN</button>
+
+      <button type="button" class="btn btn-link text-decoration-none" id="search-cancel">
+        <span data-i18n="search.cancel">{{- site.data.locales[include.lang].search.cancel -}}</span>
+      </button>
+    </div>
   </div>
 </header>

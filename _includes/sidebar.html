@@ -22,7 +22,7 @@
       <li class="nav-item{% if page.layout == 'home' %}{{ " active" }}{% endif %}">
         <a href="{{ '/' | relative_url }}" class="nav-link">
           <i class="fa-fw fas fa-home"></i>
-          <span>{{ site.data.locales[include.lang].tabs.home | upcase }}</span>
+          <span data-i18n="tabs.home" data-i18n-upcase>{{ site.data.locales[include.lang].tabs.home | upcase }}</span>
         </a>
       </li>
       <!-- the real tabs -->
@@ -34,7 +34,7 @@
               <i class="fa-fw {{ tab.icon }}"></i>
               {% assign tab_label = site.data.locales[include.lang].tabs[tab_slug] | default: tab.title %}
 
-              <span>{{ tab_label | upcase }}</span>
+              <span data-i18n="tabs.{{ tab_slug }}" data-i18n-upcase>{{ tab_label | upcase }}</span>
             </a>
           </li>
           <!-- .nav-item -->
@@ -42,6 +42,26 @@
       {% endfor %}
     </ul>
   </nav>
+
+  {% if site.data.visitor_stats.hits.size > 0 %}
+    {% assign gc_hits = site.data.visitor_stats.hits %}
+    {% assign gc_max = 1 %}
+    {% for h in gc_hits %}
+      {% if h.count > gc_max %}{% assign gc_max = h.count %}{% endif %}
+    {% endfor %}
+    <div class="visitor-graph-widget">
+      <div class="visitor-graph-header">
+        <span class="visitor-graph-label">Visitors (30d)</span>
+        <span class="visitor-graph-total">{{ site.data.visitor_stats.total }}</span>
+      </div>
+      <div class="visitor-bars">
+        {% for h in gc_hits %}
+          {% assign pct = h.count | times: 100 | divided_by: gc_max %}
+          <div class="visitor-bar" style="height:{{ pct }}%" title="{{ h.day }}: {{ h.count }}"></div>
+        {% endfor %}
+      </div>
+    </div>
+  {% endif %}
 
   <div class="sidebar-bottom d-flex flex-wrap align-items-center w-100">
 <!--    {% unless site.theme_mode %}-->

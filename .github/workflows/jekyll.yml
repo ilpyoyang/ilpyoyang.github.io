@@ -42,6 +42,16 @@ jobs:
       - name: Setup Pages
         id: pages
         uses: actions/configure-pages@v5
+      - name: Fetch GoatCounter visitor stats
+        run: |
+          END=$(date +%Y-%m-%d)
+          START=$(date -d "30 days ago" +%Y-%m-%d)
+          curl -sf \
+            -H "Authorization: Bearer ${{ secrets.GOATCOUNTER_TOKEN }}" \
+            "https://ilpyoyang.goatcounter.com/api/v0/stats/hits?start=${START}&end=${END}&daily=true" \
+            -o _data/visitor_stats.json \
+            || echo '{"hits":[],"total":0,"more":false}' > _data/visitor_stats.json
+
       - name: Build with Jekyll
         # Outputs to the './_site' directory by default
         run: bundle exec jekyll build --baseurl "${{ steps.pages.outputs.base_path }}"
