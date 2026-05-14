@@ -170,7 +170,7 @@
       return Promise.resolve();
     }
 
-    var cacheKey = 'xlate:' + window.location.pathname + ':en';
+    var cacheKey = 'xlate:v2:' + window.location.pathname + ':en';
     var blocks = collectBlocks();
     if (!blocks.length) return Promise.resolve();
 
