@@ -24,7 +24,7 @@ script_includes:
     <div class="post-meta text-muted">
       <!-- published date -->
       <span>
-        {{ site.data.locales[lang].post.posted }}
+        <span data-i18n="post.posted">{{ site.data.locales[lang].post.posted }}</span>
         {% include datetime.html date=page.date tooltip=true lang=lang %}
       </span>
 
@@ -87,7 +87,7 @@ script_includes:
               <em id="pageviews">
                 <i class="fas fa-spinner fa-spin small"></i>
               </em>
-              {{ site.data.locales[lang].post.pageview_measure }}
+              <span data-i18n="post.pageview_measure">{{ site.data.locales[lang].post.pageview_measure }}</span>
             </span>
           {% endif %}
 

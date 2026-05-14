@@ -3,12 +3,22 @@
     ko: {
       'tabs.home': '홈', 'tabs.categories': '카테고리', 'tabs.tags': '태그',
       'tabs.archives': '아카이브', 'tabs.about': '정보', 'tabs.study': '학습',
-      'search.hint': '검색', 'search.cancel': '취소'
+      'search.hint': '검색', 'search.cancel': '취소',
+      'post.posted': '게시', 'post.pageview_measure': '조회',
+      'post.read_time.unit': '분', 'post.read_time.prompt': '읽는 시간',
+      'post.share': '공유하기',
+      'post.button.previous': '이전 글', 'post.button.next': '다음 글',
+      'copyright.brief': '일부 권리 보유'
     },
     en: {
       'tabs.home': 'Home', 'tabs.categories': 'Categories', 'tabs.tags': 'Tags',
       'tabs.archives': 'Archives', 'tabs.about': 'About', 'tabs.study': 'Study',
-      'search.hint': 'Search', 'search.cancel': 'Cancel'
+      'search.hint': 'Search', 'search.cancel': 'Cancel',
+      'post.posted': 'Posted', 'post.pageview_measure': 'views',
+      'post.read_time.unit': 'min', 'post.read_time.prompt': 'read',
+      'post.share': 'Share',
+      'post.button.previous': 'Older', 'post.button.next': 'Newer',
+      'copyright.brief': 'Some rights reserved.'
     }
   };
 
@@ -27,6 +37,10 @@
       } else {
         el.textContent = t[key];
       }
+    });
+    document.querySelectorAll('[data-i18n-aria]').forEach(function (el) {
+      var key = el.getAttribute('data-i18n-aria');
+      if (t[key]) el.setAttribute('aria-label', t[key]);
     });
     var btn = document.getElementById('lang-toggle');
     if (btn) btn.textContent = lang === 'ko' ? 'EN' : 'KO';
@@ -94,11 +108,11 @@
   // ── Block collection ─────────────────────────────────────────────────────────
 
   var SKIP_ZONES = ['#sidebar', '#topbar-wrapper', 'footer', 'pre',
-    '.post-meta', '.post-navigation',
+    '.post-meta',
     '#search-result-wrapper'];
 
   function collectBlocks() {
-    var sel = 'h1,h2,h3,h4,h5,h6,p,li,blockquote,td,th,.card-title,a.post-tag,a.tag,#breadcrumb span,.categories .text-muted';
+    var sel = 'h1,h2,h3,h4,h5,h6,p,li,blockquote,td,th,.card-title,a.post-tag,a.tag,#breadcrumb span,.categories .text-muted,.license-wrapper';
     var seen = [];
     var blocks = [];
 
@@ -212,7 +226,7 @@
   // ── Persistence ──────────────────────────────────────────────────────────────
 
   function getLang() {
-    try { return localStorage.getItem('preferred-lang') || 'ko'; } catch (e) { return 'ko'; }
+    try { return localStorage.getItem('preferred-lang') || 'en'; } catch (e) { return 'en'; }
   }
 
   function applyLang(lang) {

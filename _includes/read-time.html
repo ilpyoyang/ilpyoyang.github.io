@@ -27,11 +27,9 @@
   <em>
     {{- read_time -}}
     {{ ' ' }}
-    {{- site.data.locales[include.lang].post.read_time.unit -}}
+    <span data-i18n="post.read_time.unit">{{- site.data.locales[include.lang].post.read_time.unit -}}</span>
   </em>
   {%- if include.prompt -%}
-    {%- assign _prompt_words = read_prompt | number_of_words: 'auto' -%}
-    {%- unless _prompt_words > 1 -%}{{ ' ' }}{%- endunless -%}
-    {{ read_prompt }}
+    {{ ' ' }}<span data-i18n="post.read_time.prompt">{{- read_prompt -}}</span>
   {%- endif -%}
 </span>
