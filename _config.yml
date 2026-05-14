@@ -19,7 +19,7 @@ title: Rosie Tech # the main title
 tagline: AI Engineer # it will display as the subtitle
 
 description: >- # used by seo meta and the atom feed
-  백엔드 개발 공부를 하면서 궁금한 내용들이나 학습한 부분을 정리한 개발 블로그입니다.
+  A tech blog covering AI engineering, backend development, cloud, and software engineering.
 # Fill in the protocol & hostname for your site.
 # E.g. 'https://username.github.io', note that it does not end with a '/'.
 url: "https://ilpyoyang.github.io"
