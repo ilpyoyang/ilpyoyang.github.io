@@ -76,10 +76,10 @@ ollama run qwen2.5:14b "PRD란 무엇인가?"
 
 ```mermaid
 graph TD
-    A[PM 입력\n회의록 / 이슈 / git log] --> B{라우터\nrouter.py}
-    B -->|단순 요약/분류| C[로컬 LLM\nOllama + qwen2.5]
-    B -->|복잡한 판단/코드| D[Claude Code\nClaude API]
-    C --> E[후처리\nparser.py]
+    A["PM 입력 (회의록 / 이슈 / git log)"] --> B{"라우터 (router.py)"}
+    B -->|단순 요약/분류| C["로컬 LLM (Ollama + qwen2.5)"]
+    B -->|복잡한 판단/코드| D["Claude Code (Claude API)"]
+    C --> E["후처리 (parser.py)"]
     D --> E
     E --> F[출력]
     F --> G[Notion]
@@ -603,4 +603,4 @@ if __name__ == '__main__':
 
 **로컬 LLM으로 일상 반복 작업을, Claude Code로 복잡한 판단이 필요한 작업을 처리하는 분리 구조**가 PM 에이전트 설계의 핵심이다.
 
-처음에는 회의록 요약 하나만 자동화해도 하루 30분을 아낄 수 있다. 여기에 이슈 분류, PRD 초안, 릴리스 노트까지 더하면 PM이 실제로 집중해야 할 일—사용자 인터뷰, 전략 수립, 팀 조율 등에 쓸 수 있는 시간이 늘어난다.
+처음에는 회의록 요약 하나만 자동화해도 하루 30분을 아낄 수 있다. 여기에 이슈 분류, PRD 초안, 릴리스 노트까지 더하면 PM이 실제로 집중해야 할 일 등 사용자 인터뷰, 전략 수립, 팀 조율 등에 쓸 수 있는 시간이 늘어난다.
