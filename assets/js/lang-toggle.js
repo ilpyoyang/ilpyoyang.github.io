@@ -235,17 +235,40 @@
     translatePage(lang);
   }
 
+  // ── TOC observer — translate links added dynamically by tocbot ──────────────
+
+  function watchTOC(lang) {
+    if (lang !== 'en') return;
+    var tocNav = document.getElementById('toc');
+    if (!tocNav) return;
+
+    var observer = new MutationObserver(function (mutations, obs) {
+      var links = tocNav.querySelectorAll('a');
+      if (!links.length) return;
+      obs.disconnect();
+      links.forEach(function (link) {
+        if (KO_RE.test(link.textContent)) translateElement(link);
+      });
+    });
+    observer.observe(tocNav, { childList: true, subtree: true });
+  }
+
   // ── Init ─────────────────────────────────────────────────────────────────────
 
   function init() {
     var lang = getLang();
     applyUILang(lang);
-    if (lang === 'en') translatePage('en');
+    if (lang === 'en') {
+      translatePage('en');
+      watchTOC('en');
+    }
 
     var btn = document.getElementById('lang-toggle');
     if (btn) {
       btn.addEventListener('click', function () {
-        applyLang(getLang() === 'ko' ? 'en' : 'ko');
+        var next = getLang() === 'ko' ? 'en' : 'ko';
+        applyLang(next);
+        watchTOC(next);
       });
     }
   }
