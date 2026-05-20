@@ -235,22 +235,43 @@
     translatePage(lang);
   }
 
-  // ── TOC observer — translate links added dynamically by tocbot ──────────────
+  // ── TOC translation — handles tocbot's dynamic population ───────────────────
+
+  var _tocSaved = null; // [{el, text}] — original KO text for restore
+
+  function translateTOCLinks() {
+    var links = document.querySelectorAll('#toc a, #toc-popup-content a');
+    if (!links.length) return;
+    if (!_tocSaved) {
+      _tocSaved = Array.prototype.map.call(links, function (l) {
+        return { el: l, text: l.textContent };
+      });
+    }
+    links.forEach(function (link) {
+      if (KO_RE.test(link.textContent)) translateElement(link);
+    });
+  }
+
+  function restoreTOCLinks() {
+    if (!_tocSaved) return;
+    _tocSaved.forEach(function (o) { o.el.textContent = o.text; });
+  }
 
   function watchTOC(lang) {
-    if (lang !== 'en') return;
-    var tocNav = document.getElementById('toc');
-    if (!tocNav) return;
+    if (lang === 'ko') { restoreTOCLinks(); return; }
 
-    var observer = new MutationObserver(function (mutations, obs) {
-      var links = tocNav.querySelectorAll('a');
-      if (!links.length) return;
-      obs.disconnect();
-      links.forEach(function (link) {
-        if (KO_RE.test(link.textContent)) translateElement(link);
+    // Translate any links already present (tocbot may have run first)
+    translateTOCLinks();
+
+    // Watch all #toc / #toc-popup-content navs for dynamic population
+    document.querySelectorAll('#toc, #toc-popup-content').forEach(function (nav) {
+      var observer = new MutationObserver(function (mutations, obs) {
+        if (!nav.querySelectorAll('a').length) return;
+        obs.disconnect();
+        translateTOCLinks();
       });
+      observer.observe(nav, { childList: true, subtree: true });
     });
-    observer.observe(tocNav, { childList: true, subtree: true });
   }
 
   // ── Init ─────────────────────────────────────────────────────────────────────
