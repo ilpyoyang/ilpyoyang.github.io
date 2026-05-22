@@ -8,7 +8,8 @@
       'post.read_time.unit': '분', 'post.read_time.prompt': '읽는 시간',
       'post.share': '공유하기',
       'post.button.previous': '이전 글', 'post.button.next': '다음 글',
-      'copyright.brief': '일부 권리 보유'
+      'copyright.brief': '일부 권리 보유',
+      'panel.trending_tags': '인기 태그'
     },
     en: {
       'tabs.home': 'Home', 'tabs.categories': 'Categories', 'tabs.tags': 'Tags',
@@ -18,7 +19,8 @@
       'post.read_time.unit': 'min', 'post.read_time.prompt': 'read',
       'post.share': 'Share',
       'post.button.previous': 'Older', 'post.button.next': 'Newer',
-      'copyright.brief': 'Some rights reserved.'
+      'copyright.brief': 'Some rights reserved.',
+      'panel.trending_tags': 'Trending Tags'
     }
   };
 
