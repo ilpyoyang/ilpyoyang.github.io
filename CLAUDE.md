@@ -65,6 +65,7 @@ The toggle button (`#lang-toggle`) is rendered in `_includes/topbar.html`, next 
 - Optional: `pin: true`, `math: true`, `mermaid: true`, `description`
 - Inline highlight conventions (used across posts):
   - Yellow `#fff5b1` = summary, Red `#FFE6E6` = important, Green `#DCFFE4` = personal question, Grey `#f0f0f0` = collapsible
+- **All post content must be written in English.** This includes the `title` front matter field and all body text.
 
 ### Deployment
 GitHub Pages via the `gh-pages` / `pages-deploy.yml` Actions workflow. `JEKYLL_ENV=production` enables PWA and analytics blocks.

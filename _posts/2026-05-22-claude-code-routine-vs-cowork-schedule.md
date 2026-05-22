@@ -1,104 +1,104 @@
 ---
-title: Claude Code 루틴 vs Cowork 스케줄, 뭐가 다를까
+title: Claude Code Routines vs Cowork Schedule — What's the Difference?
 date: 2026-05-22 14:00:00 +0900
 categories: [AI, Claude]
 tags: [Claude, Claude Code, Cowork, Automation, AI Agent]
 ---
 
-Claude 데스크톱 앱에서 자동화 작업을 돌리려고 보면 비슷해 보이는 두 가지 기능이 있다. **Claude Code의 루틴(Routines)** 과 **Cowork의 스케줄(Scheduled tasks)**. 둘 다 "정해진 시간에 Claude가 알아서 일하게 만든다"는 점에서는 같은데, 실제로 써보면 완전히 다른 도구다. 차이를 정리하고 어떤 작업을 어디에 두는 게 좋은지 가이드라인을 만들어봤다.
+When you start setting up automated tasks in the Claude desktop app, two features look deceptively similar: **Claude Code Routines** and **Cowork Scheduled Tasks**. Both let Claude work on its own at a fixed time, but in practice they are completely different tools. Here's a breakdown of the distinction and a decision guide for which one to use.
 
 ---
 
-## 핵심 차이는 "실행 위치"
+## The Core Difference: Where Does It Run?
 
-가장 큰 차이는 **어디서 돌아가느냐**다.
+The biggest difference is **where the task actually executes**.
 
-| 항목 | Claude Code 루틴 | Cowork 스케줄 |
+| Item | Claude Code Routines | Cowork Schedule |
 | --- | --- | --- |
-| 실행 환경 | Anthropic 클라우드 인프라 | 내 컴퓨터 (Claude Desktop 앱) |
-| 노트북 닫혀 있어도 동작? | O | X (스킵 후 재실행) |
-| 주 용도 | GitHub 레포 중심 코드 자동화 | 지식 업무 (이메일, 보고서 등) |
-| 트리거 | 스케줄 / API / GitHub 이벤트 | 스케줄 (시간/일/주) |
-| 출시 | 2026년 4월 14일 (research preview) | 기존 Cowork 기능 |
+| Runtime environment | Anthropic cloud infrastructure | Your machine (Claude Desktop app) |
+| Works with laptop closed? | Yes | No (skipped, re-run on next open) |
+| Primary use | Code automation around GitHub repos | Knowledge work (email, reports, etc.) |
+| Triggers | Schedule / API / GitHub events | Schedule (hourly / daily / weekly) |
+| Released | April 14, 2026 (research preview) | Existing Cowork feature |
 
-==Cowork 스케줄은 내 맥이 켜져 있고 Claude Desktop이 열려 있을 때만 돌아간다. 노트북을 닫고 외출하면 그동안의 작업은 스킵되고, 다시 열었을 때 자동으로 실행된다.==
+==Cowork Schedule only runs while your Mac is on and Claude Desktop is open. If you close your laptop and step out, tasks are skipped until you reopen the app.==
 
-반면 **루틴은 클라우드에서 돌기 때문에 내 노트북 상태와 무관**하다. 새벽 2시에 자고 있어도, 출장 중이어도 그대로 실행된다.
-
----
-
-## Cowork 스케줄: 로컬 기반 지식 업무 자동화
-
-### 어떤 작업에 적합한가
-* **개인 생산성 도구 연동 작업**: Gmail, Slack, Notion, Google Calendar 등 커넥터를 활용한 작업
-* **결과물이 문서/메모/스프레드시트인 작업**: 일일 브리핑, 보고서, 회의록 요약
-* **로컬 파일 접근이 필요한 작업**: `~/Documents`, `~/Projects` 같은 로컬 경로 활용
-* **출근/업무 시간대에 맞춘 작업**: 어차피 노트북이 켜져 있는 시간이라 실행 누락 가능성이 낮다
-
-### 설정 방법
-Cowork에서 새 태스크를 만들거나 기존 태스크에서 `/schedule` 명령어를 입력하면 Skill이 실행되어 스케줄을 설정해준다. 매일, 매주, 매시간 단위로 지정 가능하다.
-
-### 주의할 점
-==스케줄 화면 상단의 "Keep awake" 토글을 켜두면 맥이 잠들지 않고 작업이 누락되지 않는다.== 외출이 잦거나 출장이 많다면 이 옵션을 켜두는 게 좋다.
+**Routines, by contrast, run in the cloud and are completely independent of your laptop state.** They execute at 2 AM while you sleep or while you're traveling — no exceptions.
 
 ---
 
-## Claude Code 루틴: 클라우드 기반 개발 자동화
+## Cowork Schedule: Local Knowledge Work Automation
 
-### 어떤 작업에 적합한가
-* **GitHub 레포지토리 작업**: PR 리뷰, 이슈 트리아지, 문서 동기화
-* **항상 돌아야 하는 작업**: 노트북 상태와 무관해야 하는 모든 작업
-* **외부 시스템 트리거가 필요한 작업**: 배포 훅, 알림 시스템 연동
-* **이벤트 기반 자동화**: `pull_request.opened` 같은 GitHub 이벤트에 반응
+### What it's good for
+* **Productivity tool integrations**: tasks using connectors like Gmail, Slack, Notion, Google Calendar
+* **Document/memo/spreadsheet outputs**: daily briefings, reports, meeting summaries
+* **Local file access**: tasks that need paths like `~/Documents` or `~/Projects`
+* **Work-hours tasks**: if your laptop is already open during business hours, the risk of missing a run is low
 
-### 설정 방법
-`claude.ai/code`에서 루틴을 만들거나 Claude Code CLI에서 `/schedule` 명령어를 사용한다. 루틴 하나에 **세 가지 트리거를 동시에 걸 수 있다**:
+### How to set it up
+Create a new task in Cowork, or type `/schedule` inside an existing task — the Skill will walk you through setting a recurrence (hourly, daily, weekly).
 
-1. **스케줄**: 시간/일/주 단위 cron 방식
-2. **API 호출**: 루틴마다 전용 HTTP 엔드포인트와 인증 토큰이 발급된다
-3. **GitHub 이벤트**: 특정 레포의 PR/이슈 발생 시 자동 실행
-
-### 사용 예시
-* 매일 새벽 2시: Linear에서 가장 우선순위 높은 버그를 가져와 수정 시도 후 draft PR 생성
-* `/auth-provider` 모듈 관련 PR이 열릴 때마다 변경사항을 `#auth-changes` 채널에 요약 전송
-* 배포 알림 webhook 수신 시 자동으로 헬스 체크 후 Slack 보고
-
-### 제한사항
-==Pro 플랜은 일일 5회, Max는 그 이상으로 루틴 실행 제한이 있다.== 또한 현재는 GitHub 레포 단위로만 동작하므로, 로컬 파일이나 일반 폴더에는 접근할 수 없다.
+### Watch out for
+==Enable the "Keep awake" toggle at the top of the schedule screen so your Mac doesn't sleep and skip tasks.== If you travel frequently, turning this on is worth it.
 
 ---
 
-## 그래서 어디에 뭘 둘 것인가
+## Claude Code Routines: Cloud-Based Dev Automation
 
-내 경우 Cowork 스케줄에 두 가지 작업을 등록해뒀다:
+### What it's good for
+* **GitHub repository work**: PR review, issue triage, doc sync
+* **Always-on tasks**: anything that must not depend on your laptop being open
+* **External system triggers**: deployment hooks, notification integrations
+* **Event-driven automation**: reacting to GitHub events like `pull_request.opened`
 
-1. **Daily market briefing** - 매일 오전 8시 국내·미국 주식/산업 이슈 브리핑
-2. **Daily projects review** - 매일 오전 8시 `~/Projects` 폴더 변경사항 보고
+### How to set it up
+Create a routine at `claude.ai/code` or use `/schedule` in the Claude Code CLI. Each routine supports **three trigger types simultaneously**:
 
-이 두 작업 다 **Cowork에 두는 게 맞다**. 첫 번째는 웹 검색과 뉴스 수집 기반의 지식 업무라 루틴이 지원하지도 않고, 두 번째는 로컬 폴더 경로를 참조하기 때문에 클라우드 루틴으로는 불가능하다.
+1. **Schedule**: cron-style, hourly / daily / weekly
+2. **API call**: each routine gets its own HTTP endpoint and auth token
+3. **GitHub event**: auto-run when a specific repo's PR or issue fires
 
-다만 두 번째 작업을 GitHub 레포 단위로 재구성한다면 루틴으로 옮길 만한 가치가 있다. 출장이나 외부 일정이 잦을 때 노트북을 켜두지 않아도 보고가 누락되지 않기 때문이다.
+### Usage examples
+* Every night at 2 AM: pull the highest-priority bug from Linear, attempt a fix, open a draft PR
+* Whenever a PR touching `/auth-provider` opens: post a change summary to `#auth-changes`
+* On deploy webhook: run a health check and report to Slack
 
-### 의사결정 가이드
+### Limitations
+==Pro plan is capped at 5 routine runs per day; Max plan allows more.== Currently routines operate at the GitHub repo level only — local files and arbitrary folders are not accessible.
 
-| 질문 | Yes → Cowork | No → 다음 질문 |
+---
+
+## So Which One Should You Use?
+
+My own Cowork schedule currently has two tasks:
+
+1. **Daily market briefing** — national and US stock/industry news every morning at 8 AM
+2. **Daily projects review** — report on changes inside `~/Projects` every morning at 8 AM
+
+Both belong in Cowork. The first is web-search-based knowledge work that Routines don't support anyway, and the second references a local folder path, making cloud execution impossible.
+
+That said, if I restructure the second task around GitHub repos, moving it to a Routine would be worthwhile — then it keeps running even if my laptop is closed during a business trip.
+
+### Decision Guide
+
+| Question | Yes → Use Cowork | No → next question |
 | --- | --- | --- |
-| 결과물이 문서/메모/이메일인가? | Cowork | 다음 |
-| Gmail/Slack/Notion 등 커넥터를 쓰는가? | Cowork | 다음 |
-| 로컬 파일/폴더에 접근하는가? | Cowork | 다음 |
-| 노트북이 꺼져 있을 때도 꼭 돌아야 하는가? | **루틴** | Cowork도 OK |
-| GitHub 레포 작업인가? | **루틴** | Cowork도 OK |
+| Is the output a document, memo, or email? | Cowork | next |
+| Does it use Gmail / Slack / Notion connectors? | Cowork | next |
+| Does it access local files or folders? | Cowork | next |
+| Must it run even when the laptop is off? | **Routine** | Cowork is fine |
+| Is it a GitHub repo task? | **Routine** | Cowork is fine |
 
 ---
 
-## 정리
+## Summary
 
-| 한 줄 요약 | Claude Code 루틴 | Cowork 스케줄 |
+| One-liner | Claude Code Routines | Cowork Schedule |
 | --- | --- | --- |
-| 비유 | 클라우드 cron 서버 | 맥 자동화 매크로 |
-| 핵심 강점 | 항상 켜져 있음 | 로컬 환경과 커넥터 통합 |
-| 약점 | GitHub 레포 단위로 제한 | 노트북 의존 |
+| Analogy | Cloud cron server | Mac automation macro |
+| Key strength | Always on | Local env + connector integrations |
+| Weakness | GitHub-repo scope only | Depends on laptop being open |
 
-두 기능은 서로를 대체하는 게 아니라 **상호 보완**한다. 개발 자동화는 루틴으로, 일상 지식 업무는 Cowork로 분리해서 운영하는 게 현재 시점에서는 가장 합리적인 구성이다.
+The two features are not alternatives — they **complement each other**. The most practical setup right now is: dev automation in Routines, day-to-day knowledge work in Cowork.
 
-향후 루틴이 webhook 기반 트리거를 더 확장하고, Cowork도 클라우드 실행 옵션을 추가하면 경계가 점점 모호해질 가능성이 있다. 그때까지는 위 의사결정 표를 기준으로 작업을 분류해 등록하면 된다.
+As Routines expand webhook trigger options and Cowork potentially adds cloud execution, the boundary will blur. Until then, the decision table above is a reliable guide.
