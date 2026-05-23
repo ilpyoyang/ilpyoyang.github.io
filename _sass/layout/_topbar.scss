@@ -84,18 +84,3 @@
     display: block;
   }
 }
-
-.lang-toggle-btn {
-  font-size: 0.75rem;
-  font-weight: 700;
-  letter-spacing: 0.05em;
-  padding: 0.25rem 0.5rem;
-  border: 1px solid var(--btn-border-color, currentColor);
-  border-radius: 4px;
-  opacity: 0.7;
-  flex-shrink: 0;
-
-  &:hover {
-    opacity: 1;
-  }
-}
