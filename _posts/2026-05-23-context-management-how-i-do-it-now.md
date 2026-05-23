@@ -1,6 +1,6 @@
 ---
 title: Context Management — How I Do It Now
-date: 2026-05-23 10:00:00 +0900
+date: 2026-05-23 04:43:00 +0900
 categories: [AI, Claude]
 tags: [Context Engineering, Claude Code, Prompt Engineering, AI Agent, LLM]
 ---
