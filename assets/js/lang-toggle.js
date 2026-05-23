@@ -25,6 +25,7 @@
   };
 
   var KO_RE = /[가-힯ᄀ-ᇿ㄰-㆏]/;
+  var EN_RE = /[a-zA-Z]{3,}/;
 
   // ── UI label swap ────────────────────────────────────────────────────────────
   function applyUILang(lang) {
@@ -68,37 +69,35 @@
 
   // ── Translation API ──────────────────────────────────────────────────────────
 
-  function gtranslate(text) {
+  function gtranslate(text, sl, tl) {
     var url = 'https://translate.googleapis.com/translate_a/single' +
-      '?client=gtx&sl=ko&tl=en&dt=t&q=' + encodeURIComponent(text);
+      '?client=gtx&sl=' + sl + '&tl=' + tl + '&dt=t&q=' + encodeURIComponent(text);
     return fetch(url)
       .then(function (r) { return r.json(); })
       .then(function (d) { return d[0].map(function (x) { return x[0]; }).join(''); });
   }
 
-  // Translate one element: join its text nodes with 【N】 markers,
-  // translate as one string, then split back — preserving inline tags (code, strong, a…).
-  function translateElement(el) {
+  // Translate one element between sl and tl, joining text nodes with 【N】 markers.
+  function translateElement(el, sl, tl) {
     var nodes = getTextNodes(el);
     if (!nodes.length) return Promise.resolve(null);
 
+    var srcRe = sl === 'ko' ? KO_RE : EN_RE;
     var origTexts = nodes.map(function (n) { return n.textContent; });
-    if (!origTexts.some(function (t) { return KO_RE.test(t); })) return Promise.resolve(null);
+    if (!origTexts.some(function (t) { return srcRe.test(t); })) return Promise.resolve(null);
 
-    // Single text node — simple case
     if (nodes.length === 1) {
-      return gtranslate(origTexts[0]).then(function (t) {
+      return gtranslate(origTexts[0], sl, tl).then(function (t) {
         if (t) nodes[0].textContent = t;
         return origTexts;
       });
     }
 
-    // Multiple text nodes: join with markers so they translate as one sentence
     var joined = origTexts.map(function (t, i) {
       return t + (i < origTexts.length - 1 ? '【' + i + '】' : '');
     }).join('');
 
-    return gtranslate(joined).then(function (translated) {
+    return gtranslate(joined, sl, tl).then(function (translated) {
       var parts = translated.split(/【\d+】/);
       nodes.forEach(function (n, i) {
         n.textContent = (parts[i] != null ? parts[i] : origTexts[i]);
@@ -113,7 +112,8 @@
     '.post-meta',
     '#search-result-wrapper'];
 
-  function collectBlocks() {
+  function collectBlocks(srcLang) {
+    var srcRe = srcLang === 'ko' ? KO_RE : EN_RE;
     var sel = 'h1,h2,h3,h4,h5,h6,p,li,blockquote,td,th,.card-title,a.post-tag,a.tag,#breadcrumb span,.categories .text-muted,.license-wrapper';
     var seen = [];
     var blocks = [];
@@ -128,12 +128,11 @@
       if (el.getAttribute('data-i18n') || el.closest('[data-i18n]')) return;
       if (el.closest('code') || el.closest('pre')) return;
 
-      // KEY FIX: check whether text nodes (NOT element children) contain Korean.
-      // This correctly handles <p>Korean <code>snippet</code> more Korean</p>
-      // where children.length===1 but there IS Korean text outside the code span.
+      // Check whether text nodes (NOT element children) contain source-language text.
+      // This correctly handles <p>Text <code>snippet</code> more text</p>.
       var nodes = getTextNodes(el);
-      var hasKo = nodes.some(function (n) { return KO_RE.test(n.textContent); });
-      if (!hasKo) return;
+      var hasSrc = nodes.some(function (n) { return srcRe.test(n.textContent); });
+      if (!hasSrc) return;
 
       blocks.push(el);
     });
@@ -142,7 +141,7 @@
 
   // ── Page-level translate / restore ───────────────────────────────────────────
 
-  var _savedHtml = null; // [{ el, html }]
+  var _savedHtml = null; // [{el, html}] — snapshot of content before translation
 
   function setLoading(on) {
     var id = 'xlate-spinner';
@@ -164,19 +163,13 @@
     }
   }
 
-  function translatePage(lang) {
-    if (lang === 'ko') {
-      if (_savedHtml) {
-        _savedHtml.forEach(function (o) { o.el.innerHTML = o.html; });
-      }
-      return Promise.resolve();
-    }
-
-    var cacheKey = 'xlate:v2:' + window.location.pathname + ':en';
-    var blocks = collectBlocks();
+  // Core translation runner — finds blocks in `sl`, saves current HTML, translates to `tl`.
+  function runTranslation(sl, tl) {
+    var cacheKey = 'xlate:v2:' + window.location.pathname + ':' + tl;
+    var blocks = collectBlocks(sl);
     if (!blocks.length) return Promise.resolve();
 
-    // Snapshot original HTML for KO restore (once per page load)
+    // Snapshot original HTML for restore (once per direction — not overwritten if already set)
     if (!_savedHtml) {
       _savedHtml = blocks.map(function (el) { return { el: el, html: el.innerHTML }; });
     }
@@ -193,19 +186,15 @@
 
     setLoading(true);
 
-    // Translate all blocks in parallel (6 concurrent workers)
     var CONC = 6;
     var pending = blocks.slice();
-    var done = 0;
 
     function worker() {
       if (!pending.length) return Promise.resolve();
       var el = pending.shift();
-      return translateElement(el).then(function () {
-        done++;
+      return translateElement(el, sl, tl).then(function () {
         return worker();
       }).catch(function () {
-        done++;
         return worker();
       });
     }
@@ -217,12 +206,87 @@
 
     return Promise.all(workers)
       .then(function () {
-        // Cache translated innerHTML
         var snapshot = blocks.map(function (el) { return el.innerHTML; });
         try { sessionStorage.setItem(cacheKey, JSON.stringify(snapshot)); } catch (e) {}
       })
       .catch(function (err) { console.warn('[lang-toggle]', err); })
       .finally(function () { setLoading(false); });
+  }
+
+  function translatePage(lang) {
+    if (lang === 'ko') {
+      if (_savedHtml) {
+        // Restore pre-translation snapshot (works for both KO→EN and EN→KO paths)
+        _savedHtml.forEach(function (o) { o.el.innerHTML = o.html; });
+        _savedHtml = null;
+        return Promise.resolve();
+      }
+      // No snapshot yet. If content is Korean, it's already in KO — nothing to do.
+      if (collectBlocks('ko').length) return Promise.resolve();
+      // Content is English — translate EN→KO.
+      return runTranslation('en', 'ko');
+    }
+
+    // lang === 'en'
+    if (_savedHtml) {
+      // Restore pre-translation snapshot (e.g. EN content saved before EN→KO translation)
+      _savedHtml.forEach(function (o) { o.el.innerHTML = o.html; });
+      _savedHtml = null;
+      return Promise.resolve();
+    }
+    // No snapshot — translate KO→EN if content has Korean.
+    return runTranslation('ko', 'en');
+  }
+
+  // ── TOC translation — handles tocbot's dynamic population ───────────────────
+
+  var _tocSaved = null; // [{el, text}] — original text for restore
+
+  function translateTOCLinks(tl) {
+    var links = document.querySelectorAll('#toc a, #toc-popup-content a');
+    if (!links.length) return;
+    if (!_tocSaved) {
+      _tocSaved = Array.prototype.map.call(links, function (l) {
+        return { el: l, text: l.textContent };
+      });
+    }
+    var sl = tl === 'en' ? 'ko' : 'en';
+    var srcRe = sl === 'ko' ? KO_RE : EN_RE;
+    links.forEach(function (link) {
+      if (srcRe.test(link.textContent)) translateElement(link, sl, tl);
+    });
+  }
+
+  function restoreTOCLinks() {
+    if (!_tocSaved) return;
+    _tocSaved.forEach(function (o) { o.el.textContent = o.text; });
+  }
+
+  function watchTOC(lang) {
+    if (lang === 'ko') {
+      restoreTOCLinks();
+      // For English-content pages: translate TOC links EN→KO as well
+      var links = document.querySelectorAll('#toc a, #toc-popup-content a');
+      links.forEach(function (link) {
+        if (EN_RE.test(link.textContent) && !KO_RE.test(link.textContent)) {
+          translateElement(link, 'en', 'ko');
+        }
+      });
+      return;
+    }
+
+    // Translate any links already present (tocbot may have run first)
+    translateTOCLinks('en');
+
+    // Watch all #toc / #toc-popup-content navs for dynamic population
+    document.querySelectorAll('#toc, #toc-popup-content').forEach(function (nav) {
+      var observer = new MutationObserver(function (mutations, obs) {
+        if (!nav.querySelectorAll('a').length) return;
+        obs.disconnect();
+        translateTOCLinks('en');
+      });
+      observer.observe(nav, { childList: true, subtree: true });
+    });
   }
 
   // ── Persistence ──────────────────────────────────────────────────────────────
@@ -235,45 +299,6 @@
     applyUILang(lang);
     try { localStorage.setItem('preferred-lang', lang); } catch (e) {}
     translatePage(lang);
-  }
-
-  // ── TOC translation — handles tocbot's dynamic population ───────────────────
-
-  var _tocSaved = null; // [{el, text}] — original KO text for restore
-
-  function translateTOCLinks() {
-    var links = document.querySelectorAll('#toc a, #toc-popup-content a');
-    if (!links.length) return;
-    if (!_tocSaved) {
-      _tocSaved = Array.prototype.map.call(links, function (l) {
-        return { el: l, text: l.textContent };
-      });
-    }
-    links.forEach(function (link) {
-      if (KO_RE.test(link.textContent)) translateElement(link);
-    });
-  }
-
-  function restoreTOCLinks() {
-    if (!_tocSaved) return;
-    _tocSaved.forEach(function (o) { o.el.textContent = o.text; });
-  }
-
-  function watchTOC(lang) {
-    if (lang === 'ko') { restoreTOCLinks(); return; }
-
-    // Translate any links already present (tocbot may have run first)
-    translateTOCLinks();
-
-    // Watch all #toc / #toc-popup-content navs for dynamic population
-    document.querySelectorAll('#toc, #toc-popup-content').forEach(function (nav) {
-      var observer = new MutationObserver(function (mutations, obs) {
-        if (!nav.querySelectorAll('a').length) return;
-        obs.disconnect();
-        translateTOCLinks();
-      });
-      observer.observe(nav, { childList: true, subtree: true });
-    });
   }
 
   // ── Init ─────────────────────────────────────────────────────────────────────
